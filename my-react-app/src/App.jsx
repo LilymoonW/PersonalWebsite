@@ -57,11 +57,11 @@ function PageContent() {
                colour pools beside the content and the page stays white
                where the text sits. */
             {
-              color: 'var(--glow-warm)',
+              color: '#f5e68f',
               at: { x: 8, y: 30 },
-              size: 50,
-              height: 32,
-              intensity: 0.65,
+              size: 56,
+              height: 36,
+              intensity: 0.8,
               blur: 90,
               shape: 'splosh',
               speed: 21,
@@ -88,11 +88,11 @@ function PageContent() {
               delay: -11,
             },
             {
-              color: '#b6cbf2',
+              color: '#9bbcf1',
               at: { x: 66, y: 62 },
-              size: 50,
-              height: 34,
-              intensity: 0.48,
+              size: 58,
+              height: 40,
+              intensity: 0.7,
               blur: 92,
               speed: 19,
               delay: -3,
