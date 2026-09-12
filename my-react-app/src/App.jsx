@@ -1,5 +1,5 @@
 import Nav from './components/navbar/Nav.jsx'
-import Gradient from './components/gradient/Gradient.jsx'
+import Hero from './components/hero/Hero.jsx'
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <Nav />
 
-      <section id="hero"></section>
+      <Hero />
       <section id="about"></section>
       <section id="projects"></section>
       <section id="experience"></section>

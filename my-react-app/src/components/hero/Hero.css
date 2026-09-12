@@ -1,0 +1,76 @@
+/* Hero — structural scaffolding only. Regions are positioned; the
+   visuals inside them are still to come. */
+
+.hero {
+  min-height: 90svh; /* the hero is taller than the generic section */
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* keeps the gradient wash and decorations clipped */
+}
+
+.hero__inner {
+  position: relative; /* sits above the <Gradient /> wash */
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Headline / subhead / CTA */
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.hero__subhead {
+  margin-top: 1.5rem;
+  font-size: 1.5rem; /* slightly larger than the base font size */
+  color: var(--text-secondary);
+}
+
+/* Centerpiece imagery */
+.hero__visual {
+  min-height: 200px; /* placeholder height — drop once there's content */
+
+  & img,
+  & video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    image-rendering: pixelated; /* preserves the dither at scale */
+  }
+}
+.hero h1 {
+  /* scales with the viewport: ~40px on a small phone, capped at 160px */
+  font-size: clamp(2.5rem, 11vw, 10rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.hero a {
+  font-family: var(--sans); /* Catamaran, matching the subhead */
+  font-size: inherit; /* tracks .hero__subhead rather than the global 15px */
+  font-weight: 800;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-underline-position: from-font;
+  padding-bottom: 2px;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
