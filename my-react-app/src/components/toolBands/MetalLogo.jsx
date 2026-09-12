@@ -35,26 +35,33 @@ export default function MetalLogo({ src }) {
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE)
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR)
     const image = new Image()
-    let frame, disposed=false, visible=false, loaded=false
+    let frame, disposed=false, visible=false, loaded=false, hovered=false
     const motion=matchMedia('(prefers-reduced-motion: reduce)')
     const draw = time => {
       gl.uniform1f(uniform('u_time'),motion.matches ? 0 : time/1000)
       gl.drawArrays(gl.TRIANGLES,0,6)
-      if (visible && !motion.matches) frame=requestAnimationFrame(draw)
+      if (visible && hovered && !motion.matches) frame=requestAnimationFrame(draw)
     }
-    const refresh = () => { cancelAnimationFrame(frame); if (loaded && visible) frame=requestAnimationFrame(draw) }
+    const refresh = () => { cancelAnimationFrame(frame); if (loaded && visible && hovered) frame=requestAnimationFrame(draw) }
     const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;refresh()})
     observer.observe(canvas); motion.addEventListener('change',refresh)
+    // Only animate while hovered: the program and texture stay compiled, so the
+    // first frame after pointerenter is immediate instead of a cold spin-up.
+    const logo=canvas.closest('.tool-logo')
+    const enter=()=>{hovered=true;refresh()}, leave=()=>{hovered=false;refresh()}
+    logo?.addEventListener('pointerenter',enter); logo?.addEventListener('pointerleave',leave)
     image.onload=()=>{
       if(disposed)return
       const source=document.createElement('canvas');source.width=128;source.height=128
       source.getContext('2d').drawImage(image,0,0,128,128)
       gl.bindTexture(gl.TEXTURE_2D,texture)
       gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,source)
-      loaded=true;canvas.style.opacity='1';refresh()
+      loaded=true
+      gl.uniform1f(uniform('u_time'),0);gl.drawArrays(gl.TRIANGLES,0,6)
+      refresh()
     }
     image.src=src
-    return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();motion.removeEventListener('change',refresh);gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);shaders.forEach(s=>gl.deleteShader(s))}
+    return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();logo?.removeEventListener('pointerenter',enter);logo?.removeEventListener('pointerleave',leave);motion.removeEventListener('change',refresh);gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);shaders.forEach(s=>gl.deleteShader(s))}
   }, [src])
   return <canvas ref={ref} width="128" height="128" aria-hidden="true" />
 }

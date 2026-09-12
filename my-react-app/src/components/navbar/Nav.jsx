@@ -8,8 +8,11 @@ const LINKS = [
   { id: 'contact', label: 'contact me' },
 ]
 
-function Nav() {
-  const [active, setActive] = useState('')
+// `activeId` pins the underline on pages that have no sections to observe —
+// a detail page still belongs to one of these links.
+function Nav({ sticky = true, hrefBase = '', activeId }) {
+  const [observed, setObserved] = useState('')
+  const active = activeId ?? observed
 
   // Underline the link whose section is currently in view.
   useEffect(() => {
@@ -23,7 +26,7 @@ function Nav() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
 
-        if (visible) setActive(visible.target.id)
+        if (visible) setObserved(visible.target.id)
       },
       { rootMargin: '-40% 0px -55% 0px' },
     )
@@ -33,12 +36,12 @@ function Nav() {
   }, [])
 
   return (
-    <nav className="nav" aria-label="Main">
+    <nav className={`nav${sticky ? '' : ' nav--static'}`} aria-label="Main">
       <ul>
         {LINKS.map(({ id, label }) => (
           <li key={id}>
             <a
-              href={`#${id}`}
+              href={id === 'projects' ? `${hrefBase || './'}?projects` : `${hrefBase}#${id}`}
               className={active === id ? 'active' : undefined}
               aria-current={active === id ? 'true' : undefined}
             >

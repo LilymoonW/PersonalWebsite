@@ -3,18 +3,22 @@
 // Uses the same animated gradient mask and outline reveal, with the
 // portfolio's typography, scoped SVG IDs and pointer events.
 import { useId, useState } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
+import { motion, useReducedMotion, useMotionValue, useSpring } from 'motion/react'
 import './TextHoverEffect.css'
 
 export default function TextHoverEffect() {
   const id = useId().replaceAll(':', '')
   const reduced = useReducedMotion()
   const [hovered, setHovered] = useState(false)
-  const [cursor, setCursor] = useState({ cx: 500, cy: 70 })
+  const rawX = useMotionValue(500), rawY = useMotionValue(70)
+  const spring = { stiffness: 900, damping: 60, mass: .35 }
+  const cx = useSpring(rawX, reduced ? { duration: 0 } : spring)
+  const cy = useSpring(rawY, reduced ? { duration: 0 } : spring)
   const follow = event => {
     const box = event.currentTarget.getBoundingClientRect()
-    setCursor({ cx: (event.clientX - box.left) / box.width * 1000, cy: (event.clientY - box.top) / box.height * 140 })
-    setHovered(true)
+    rawX.set((event.clientX - box.left) / box.width * 1000)
+    rawY.set((event.clientY - box.top) / box.height * 140)
+    if (!hovered) setHovered(true)
   }
   const words = <><tspan>Design</tspan><tspan fontSize="32" fontStyle="normal"> ✶ </tspan><tspan>Product</tspan><tspan fontSize="32" fontStyle="normal"> ✶ </tspan><tspan>Code</tspan></>
   const textProps = { x: 500, y: 76, textAnchor: 'middle', dominantBaseline: 'middle', textLength: 970, lengthAdjust: 'spacingAndGlyphs' }
@@ -31,7 +35,7 @@ export default function TextHoverEffect() {
           <stop offset="100%" stopColor="#8b5cf6" />
         </linearGradient>
         <motion.radialGradient id={`${id}-reveal`} gradientUnits="userSpaceOnUse" r="230"
-          animate={cursor} initial={false} transition={{ duration: reduced ? 0 : .12, ease: 'easeOut' }}>
+          cx={cx} cy={cy}>
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />
         </motion.radialGradient>

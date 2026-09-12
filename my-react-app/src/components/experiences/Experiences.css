@@ -24,7 +24,20 @@
 .experience-summary { font: 400 16px/1.65 var(--sans); color: #403b40; margin: 0 0 12px; }
 .experience-timeline__rail { position: absolute; left: 32px; top: 0; width: 2px; overflow: hidden; background: transparent; mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
 .experience-timeline__beam { position: absolute; left: 0; right: 0; top: 0; width: 2px; border-radius: 999px; background: linear-gradient(to top, #bb75e4 0%, #f08fbe 10%, transparent 100%); }
+/* Start just above the first entry without shifting the scroll endpoint. */
+.experience-timeline__rail { clip-path: inset(120px 0 0); }
 .experience-actions { display: flex; justify-content: flex-end; margin: .5rem 0 1rem; }
+.experience-preview { margin-top: 18px; }
+.experience-preview--2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: clamp(110px, 14vw, 180px) 64px; gap: 8px; }
+.experience-preview__image { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; }
+.experience-preview__image--contain { object-fit: contain; background: #f8f5f7; }
+.experience-preview--2 .experience-preview__image--1 { grid-column: 1; grid-row: 1 / 3; }
+.experience-preview--2 .experience-preview__image--2 { grid-column: 2; grid-row: 1; }
+.experience-preview--2 .experience-actions { grid-column: 2; grid-row: 2; margin: 0; align-items: center; justify-content: center; }
+.experience-preview--2 .learn-more { width: 100%; max-width: 190px; height: 64px; }
+.experience-preview--1 .experience-preview__image { height: auto; max-height: 320px; }
+.experience-preview--1 .experience-actions { margin-top: 0; }
+.experience-preview--1 .learn-more { height: 64px; width: 160px; }
 .learn-more {
   position: relative;
   isolation: isolate;
@@ -65,6 +78,7 @@
   .experience-timeline__label { max-width: 256px; }
 }
 @media (max-width: 767px) {
+  .experience-timeline__rail { clip-path: inset(24px 0 0); }
   .experience-timeline__entry { padding-top: 40px; gap: 0; }
   .experience-timeline__label { width: 0; flex-direction: column; }
   .experience-timeline__desktop-date { display: none; }
@@ -81,6 +95,18 @@
 .learn-more:hover, .learn-more:focus-visible { color: #fff; text-decoration: none; }
 .experience-page { min-height: 100svh; box-sizing: border-box; background: #fff; color: #403b40; padding: clamp(32px, 7vw, 96px) 24px; font: 400 16px/1.65 var(--sans); }
 .experience-page__inner { max-width: 740px; margin-inline: auto; }
+/* Case-study pages carry a sticky section rail beside the reading column, so
+   they need room for both; the column itself stays ~740px. */
+.experience-page--wide .experience-page__inner { max-width: 1000px; }
+/* The page carries its own padding, so the nav pulls back out to the viewport
+   edge — otherwise it sits inset from every other page's nav. */
+.experience-page .nav { margin: calc(clamp(32px, 7vw, 96px) * -1) -24px clamp(32px, 7vw, 96px); }
+/* Case-study pages start with the header band directly under the nav, so
+   the page gives up its top padding and the nav its pull-up margin. */
+.experience-page--wide { padding-top: 0; }
+.experience-page--wide .nav { margin: 0 -24px; }
+:root:has(.experience-page--wide) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { :root:has(.experience-page--wide) { scroll-behavior: auto; } }
 .experience-page__back { display: inline-block; margin-bottom: 64px; color: #97446d; font: inherit; }
 .experience-page h1 { font: 600 clamp(28px, 5vw, 44px)/1.2 var(--sans); color: #08060d; margin: 0 0 12px; letter-spacing: -.02em; }
 .experience-page .experience-timeline__dates { margin-bottom: 32px; }

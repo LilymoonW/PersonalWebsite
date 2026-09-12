@@ -29,11 +29,19 @@
   position: relative;
   margin-left: 25%;
   container-type: inline-size;
+  /* One shared inset for every child, so the heading, paragraph, eyes and
+     interests line all start on the same left axis. Previously this lived
+     on .about__intro alone, which indented the text relative to the
+     graphics below it. */
+  padding-inline: clamp(.5rem, 2.5vw, 2rem);
   padding-bottom: clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
 }
 
 .about__intro {
-  padding-inline: clamp(.5rem, 2.5vw, 2rem);
   padding-bottom: clamp(.75rem, 2vw, 1.5rem);
 }
 
@@ -46,6 +54,7 @@
 
 .about__intro p {
   max-width: 43rem;
+  margin-inline: 0; /* left-anchored, not centred within the column */
   font-size: clamp(.78rem, 1.45vw, 1.1rem);
   line-height: 1.65;
   letter-spacing: 0;
@@ -89,8 +98,7 @@
 @media (max-width: 540px) {
   .about { padding-inline: .7rem; padding-bottom: 3rem; }
   .about__portrait { left: -6%; width: 56%; top: -10%; }
-  .about__content { margin-left: 25%; }
-  .about__intro { padding-inline: .9rem .2rem; }
+  .about__content { margin-left: 25%; padding-inline: .9rem; }
   .about h2 { font-size: 2rem; }
   .about__intro p { font-size: .72rem; line-height: 1.6; }
 }

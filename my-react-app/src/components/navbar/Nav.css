@@ -7,6 +7,10 @@
   padding-top: 24px;
   padding-bottom: 12px;
   padding-right: 36px;
+
+  /* Detail pages opt out of stickiness: the case study carries its own
+     section rail, so a second nav trailing down the page is just clutter. */
+  &.nav--static { position: static; }
 }
 
 .nav ul {

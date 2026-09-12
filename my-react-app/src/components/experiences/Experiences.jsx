@@ -5,9 +5,20 @@ import './Experiences.css'
 
 function ExperienceContent({ experience }) {
   const reducedMotion = useReducedMotion()
+  const previews = experience.previews?.slice(0, 2) ?? []
   return (
     <>
       <p className="experience-summary">{experience.summary}</p>
+      <div className={`experience-preview experience-preview--${previews.length}`}>
+      {previews.map((photo, index) => photo.type === 'video' ? (
+        <video key={photo.src} className={`experience-preview__image experience-preview__image--${index + 1}`}
+          controls playsInline preload="none" poster={photo.poster} width="1440" height="904" aria-label={photo.alt}>
+          <source src={photo.src} type="video/mp4" />
+        </video>
+      ) : <img
+        className={`experience-preview__image experience-preview__image--${index + 1}${photo.fit === 'contain' ? ' experience-preview__image--contain' : ''}`}
+        key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
+      />)}
       <div className="experience-actions">
         <motion.a className="learn-more" href={`?experience=${experience.id}`}
           aria-label={`Learn more about ${experience.title} at ${experience.company}`}
@@ -16,6 +27,7 @@ function ExperienceContent({ experience }) {
           transition={{ type: 'spring', stiffness: 220, damping: 24 }}>
           Learn more
         </motion.a>
+      </div>
       </div>
     </>
   )

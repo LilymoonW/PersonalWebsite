@@ -3,7 +3,7 @@
 .tool-band__group { display:flex; align-items:center; flex-shrink:0; }
 .tool-logo { width:clamp(86px,8vw,112px); flex-shrink:0; display:grid; justify-items:center; gap:9px; padding:16px 0; }
 .tool-logo__art { position:relative; display:block; width:58px; height:58px; filter:drop-shadow(0 2px 1px #9e487e30) drop-shadow(0 -1px 0 #fff); }
-.tool-logo__frost { position:absolute; inset:0; mask:var(--logo) center/contain no-repeat; background:linear-gradient(135deg,#ffffffef 0%,#fff7fbea 22%,#e6dae5b0 47%,#ffffff 51%,#e7e2f1b0 74%,#fffaffed); backdrop-filter:blur(8px); box-shadow:inset 0 1px 2px #fff; }
+.tool-logo__frost { position:absolute; inset:0; mask:var(--logo) center/contain no-repeat; background:linear-gradient(135deg,#ffffffef 0%,#fff7fbea 22%,#e6dae5b0 47%,#ffffff 51%,#e7e2f1b0 74%,#fffaffed); box-shadow:inset 0 1px 2px #fff; }
 .tool-logo__art canvas { position:absolute; inset:0; width:100%; height:100%; opacity:0; }
 .tool-logo__glow { position:absolute; inset:-4px; mask:var(--logo) center/contain no-repeat; background:linear-gradient(120deg,#ff60b2,#d97aec,#9b79ff,#ffb9db); opacity:0; filter:blur(9px); transition:opacity .3s; }
 .tool-logo__art { isolation:isolate; }
@@ -23,8 +23,8 @@
   animation: none;
 }
 .tool-logo:hover .tool-logo__frost { animation: logo-reflection 5s ease-in-out infinite alternate; }
-.tool-logo__art canvas { display: none; }
-.tool-logo:hover .tool-logo__art canvas { display: block; }
+.tool-logo__art canvas { visibility: hidden; }
+.tool-logo:hover .tool-logo__art canvas { visibility: visible; }
 @keyframes logo-reflection {
   from { background-position: 42% 45%; }
   to { background-position: 58% 55%; }

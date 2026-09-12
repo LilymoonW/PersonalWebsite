@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original full-size NBA source images; only the optimized .webp files are used.
+src/assets/light/nba/raw/

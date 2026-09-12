@@ -18,9 +18,16 @@
 .contact__content:has(.contact__social:is(:hover, :focus-visible)) .contact__phone-rest { opacity: 0; }
 .contact__content:has(.contact__social:is(:hover, :focus-visible)) .contact__phone-hover { opacity: 1; }
 @media (max-width: 760px) {
-  #contact.contact { min-height: 650px; padding-bottom: 50px; }
-  .contact__content { grid-template-columns: 1fr; gap: 24px; margin-top: 0; }
-  .contact__phone { width: min(100%, 400px); }
+  #contact.contact { min-height: auto; padding-top: 40px; padding-bottom: 50px; }
+  .contact__content { grid-template-columns: 1fr; gap: 12px; margin-top: 0; }
+  /* Stacked, the phone reads better above the copy. Reordering visually
+     rather than in the markup keeps the heading first for screen readers
+     and tab order — the phone is aria-hidden decoration either way. */
+  /* The square source has empty space below the phone. Reserve only the
+     artwork's height in the stacked layout so it sits near the heading. */
+  .contact__phone { order: -1; width: min(100%, 400px); justify-self: center; position: relative; aspect-ratio: 5 / 4; display: block; }
+  .contact__phone img { position: absolute; inset: 0; }
+  .contact__copy { order: 0; }
   .contact__socials { margin-top: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -35,4 +42,17 @@
 @media (prefers-reduced-motion: reduce) {
   .contact__phone img, .contact__social, .contact__social .tool-logo__art, .contact__social .tool-logo__tint, .contact__social .tool-logo__glow { transition: none; }
   .contact__social:focus-visible .tool-logo__frost { animation: none; }
+}
+
+/* Keep decorative image overflow inside the contact background. */
+.contact-footer {
+  display: flow-root;
+  overflow: hidden;
+  padding-bottom: 0;
+  background: radial-gradient(ellipse at 12% 115%, #f3bfd9 0%, #f9e0ed 35%, #fff0 70%), #fff;
+}
+.contact-footer #contact.contact { min-height: 0; padding-bottom: 0; background: transparent; }
+@media (min-width: 761px) {
+  .contact-footer .contact__phone { position: relative; display: block; aspect-ratio: 5 / 4; }
+  .contact-footer .contact__phone img { position: absolute; inset: 0; }
 }

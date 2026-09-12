@@ -1,16 +1,44 @@
+import { useEffect } from 'react'
 import Nav from './components/navbar/Nav.jsx'
 import Hero from './components/hero/Hero.jsx'
 import About from './components/aboutMe/About.jsx'
 import Gradient from './components/gradient/Gradient.jsx'
 import Projects from './components/projects/Projects.jsx'
+import ProjectsPage from './components/projects/ProjectsPage.jsx'
 import Experiences from './components/experiences/Experiences.jsx'
 import ExperiencePage from './components/experiences/ExperiencePage.jsx'
 import Contact from './components/contact/Contact.jsx'
+import BunnyFooter from './components/footer/BunnyFooter.jsx'
 import './App.css'
 
-function App() {
+function PageContent() {
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (!['about', 'projects', 'experience', 'contact'].includes(id)) return
+    let cancelled = false
+    const align = () => {
+      if (!cancelled) document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
+    const cancel = () => { cancelled = true }
+    // React creates the anchor after the browser's initial fragment navigation.
+    const frame = requestAnimationFrame(align)
+    const afterLoad = () => { document.fonts.ready.then(align) }
+    if (document.readyState === 'complete') afterLoad()
+    else window.addEventListener('load', afterLoad, { once: true })
+    // Never pull the visitor back after they start navigating themselves.
+    const events = ['wheel', 'touchstart', 'pointerdown', 'keydown']
+    events.forEach(event => window.addEventListener(event, cancel, { passive: true }))
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(frame)
+      window.removeEventListener('load', afterLoad)
+      events.forEach(event => window.removeEventListener(event, cancel))
+    }
+  }, [])
+
+  if (new URLSearchParams(window.location.search).has('projects')) return <><ProjectsPage /><BunnyFooter /></>
   const experienceId = new URLSearchParams(window.location.search).get('experience')
-  if (experienceId !== null) return <ExperiencePage id={experienceId} />
+  if (experienceId !== null) return <><ExperiencePage id={experienceId} /><BunnyFooter /></>
 
   return (
     <>
@@ -31,9 +59,9 @@ function App() {
             {
               color: 'var(--glow-warm)',
               at: { x: 8, y: 30 },
-              size: 46,
-              height: 30,
-              intensity: 0.55,
+              size: 50,
+              height: 32,
+              intensity: 0.65,
               blur: 90,
               shape: 'splosh',
               speed: 21,
@@ -60,11 +88,11 @@ function App() {
               delay: -11,
             },
             {
-              color: '#bfbcef',
+              color: '#b6cbf2',
               at: { x: 66, y: 62 },
-              size: 48,
-              height: 32,
-              intensity: 0.38,
+              size: 50,
+              height: 34,
+              intensity: 0.48,
               blur: 92,
               speed: 19,
               delay: -3,
@@ -88,9 +116,13 @@ function App() {
 
       <Projects />
       <Experiences />
-      <Contact />
+      <div className="contact-footer">
+        <Contact />
+      </div>
     </>
   )
 }
 
-export default App
+export default function App() {
+  return <PageContent />
+}

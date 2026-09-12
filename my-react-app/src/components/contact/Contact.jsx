@@ -4,8 +4,8 @@ import MetalLogo from '../toolBands/MetalLogo'
 import '../toolBands/ToolBands.css'
 import './Contact.css'
 
-// Replace with the owner's profile URL when available.
-const instagramUrl = 'https://www.instagram.com/'
+const instagramUrl = 'https://www.instagram.com/lilymoonsun/'
+const youtubeUrl = 'https://www.youtube.com/@lilymoon.whalen'
 
 export default function Contact() {
   return (
@@ -30,7 +30,7 @@ export default function Contact() {
                   <span className="tool-logo__tint" />
                 </span>
               </a>
-              <a className="contact__social tool-logo" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube (opens in a new tab)">
+              <a className="contact__social tool-logo" href={youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube (opens in a new tab)">
                 <span className="tool-logo__art" aria-hidden="true" style={{ '--logo': "url('/logos/social/youtube.svg')", '--tint': '#ff0033' }}>
                   <span className="tool-logo__glow" />
                   <span className="tool-logo__frost" />

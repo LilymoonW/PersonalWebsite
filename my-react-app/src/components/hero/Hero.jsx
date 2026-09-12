@@ -1,5 +1,5 @@
-import BoomerangVideo from '../boomerangVideo/BoomerangVideo.jsx'
-import lilyVideo from '../../assets/light/videos/ditherLilies.mp4'
+import lilyVideo from '../../assets/light/videos/ditherLilies-loop.mp4'
+import lilyPoster from '../../assets/light/videos/ditherLilies-poster.png'
 import './Hero.css'
 
 /**
@@ -15,7 +15,7 @@ import './Hero.css'
  *   decorations/decoration.webp     tall ASCII stipple figure
  *   decorations/bunny.webp          wide ASCII stipple strip
  *   phone/1.webp, phone/2.webp      600x600 squares
- *   videos/ditherLilies.mp4         dithered lilies loop
+ *   videos/ditherLilies-loop.mp4    dithered lilies, ping-pong baked in
  *
  * To animate the eyes later, import a sequence with a glob and step an
  * index through it — the frames are numbered so sort order is play order:
@@ -33,19 +33,17 @@ function Hero() {
     <section id="hero" className="hero">
 
       <div className="hero__inner">
-        {/* Headline, subhead, any call to action. */}
+        {/* Headline. */}
         <div className="hero__title">
+          <p className="hero__eyebrow">portfolio</p>
           <h1>Lilymoon</h1>
-          <div className="hero__subhead">
-              <p>Welcome to my personal website</p>
-              <p>Check out my <a href="#experience">resume</a></p>
-          </div>
-    
         </div>
 
         {/* Centerpiece — the eyes, or whichever asset leads. */}
         <div className="hero__visual">
-          <BoomerangVideo src={lilyVideo} className="hero__video" />
+          <video className="hero__video" src={lilyVideo}
+            width="256" height="256" poster={lilyPoster}
+            autoPlay loop muted playsInline preload="auto" />
         </div>
       </div>
 

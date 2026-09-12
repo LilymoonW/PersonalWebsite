@@ -24,8 +24,11 @@
   top: var(--blob-y);
   width: var(--blob-w);
   height: var(--blob-h);
-  margin-left: calc(var(--blob-w) / -2);
-  margin-top: calc(var(--blob-h) / -2);
+  /* Centred on the anchor with `translate`, not percentage margins: a
+     percentage margin-top resolves against the container's *width*, which
+     threw blobs far off their anchor in any wide, short container. The
+     standalone property composes with the animated `transform` below. */
+  translate: -50% -50%;
   /* Default is a circle; `shape: 'splosh'` overrides this with an
      irregular radius so the blob reads as a spill, not a halo. */
   border-radius: var(--blob-radius, 50%);
