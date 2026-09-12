@@ -1,4 +1,3 @@
-import Gradient from '../gradient/Gradient.jsx'
 import BoomerangVideo from '../boomerangVideo/BoomerangVideo.jsx'
 import lilyVideo from '../../assets/light/videos/ditherLilies.mp4'
 import './Hero.css'

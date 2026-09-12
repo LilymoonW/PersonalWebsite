@@ -1,0 +1,195 @@
+{
+  "width": 1102,
+  "height": 257,
+  "frames": [
+    {
+      "source": "left/look-left-01.png",
+      "cropOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-02.png",
+      "cropOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-03.png",
+      "cropOffset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-04.png",
+      "cropOffset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-05.png",
+      "cropOffset": [
+        -16,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-06.png",
+      "cropOffset": [
+        -16,
+        0
+      ]
+    },
+    {
+      "source": "left/look-left-07.png",
+      "cropOffset": [
+        -20,
+        -20
+      ]
+    },
+    {
+      "source": "left/look-left-08.png",
+      "cropOffset": [
+        -4,
+        -20
+      ]
+    },
+    {
+      "source": "left/look-left-09.png",
+      "cropOffset": [
+        0,
+        -20
+      ]
+    },
+    {
+      "source": "left/look-left-10.png",
+      "cropOffset": [
+        0,
+        -20
+      ]
+    },
+    {
+      "source": "right/look-right-02.png",
+      "cropOffset": [
+        20,
+        0
+      ]
+    },
+    {
+      "source": "right/look-right-03.png",
+      "cropOffset": [
+        20,
+        0
+      ]
+    },
+    {
+      "source": "right/look-right-04.png",
+      "cropOffset": [
+        24,
+        0
+      ]
+    },
+    {
+      "source": "right/look-right-05.png",
+      "cropOffset": [
+        40,
+        0
+      ]
+    },
+    {
+      "source": "right/look-right-06.png",
+      "cropOffset": [
+        40,
+        0
+      ]
+    },
+    {
+      "source": "right/look-right-07.png",
+      "cropOffset": [
+        40,
+        -4
+      ]
+    },
+    {
+      "source": "right/look-right-08.png",
+      "cropOffset": [
+        48,
+        0
+      ]
+    },
+    {
+      "source": "front/blink-front-01.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-02.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-03.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-04.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-05.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-06.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-07.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-08.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-09.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    },
+    {
+      "source": "front/blink-front-10.png",
+      "cropOffset": [
+        84,
+        20
+      ]
+    }
+  ]
+}

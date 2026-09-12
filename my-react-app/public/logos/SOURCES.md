@@ -1,0 +1,1 @@
+Logos from https://github.com/simple-icons/simple-icons (CC0 collection) and Java/Slack from https://github.com/devicons/devicon (MIT). Brand trademarks belong to their owners. React Native uses React; Claude Code uses Claude.

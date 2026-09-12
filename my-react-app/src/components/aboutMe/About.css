@@ -1,0 +1,96 @@
+.about {
+  min-height: auto;
+  padding: clamp(.75rem, 1.5vw, 1.5rem) clamp(1rem, 5vw, 5rem) clamp(3rem, 6vw, 6rem);
+  /* No `isolation: isolate` — that would trap the wash inside this
+     section, which is exactly the hard edge we want to avoid. */
+}
+
+.about__inner {
+  position: relative;
+  z-index: 1; /* above the shared .hero-about__wash */
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.about__portrait {
+  position: absolute;
+  width: 48%;
+  height: auto;
+  left: -9%;
+  /* Negative, so the figure rises out of the section and overlaps the
+     hero above it — nothing on this path clips, so it stays whole. */
+  top: -18%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.about__content {
+  position: relative;
+  margin-left: 25%;
+  container-type: inline-size;
+  padding-bottom: clamp(1rem, 4vw, 3rem);
+}
+
+.about__intro {
+  padding-inline: clamp(.5rem, 2.5vw, 2rem);
+  padding-bottom: clamp(.75rem, 2vw, 1.5rem);
+}
+
+.about h2 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-style: italic;
+  letter-spacing: -.025em;
+  margin: 0 0 .65rem;
+}
+
+.about__intro p {
+  max-width: 43rem;
+  font-size: clamp(.78rem, 1.45vw, 1.1rem);
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+.about__eyes {
+  width: 100%;
+  margin: 0;
+  /* Same as the hero video: the source's white ground would otherwise
+     read as a rectangle sitting on the wash. */
+  mix-blend-mode: multiply;
+  position: relative;
+}
+
+.about__interests {
+  margin: .8rem 0 0;
+  padding: 0;
+  position: relative;
+}
+
+/* A slight, constant backlight behind the interests line. The text is
+   white, so on the pale wash it would otherwise be barely legible until
+   hovered. This is deliberately faint — just enough to lift the letters
+   off the background — and it does not change on hover: the hover state
+   reveals the colour fill inside the glyphs, and brightening the backing
+   at the same time would read as a flash. */
+.about__interests::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 16% -3% 20%;
+  background:
+    radial-gradient(ellipse at 20% 50%, #f19ac6 0%, transparent 60%),
+    radial-gradient(ellipse at 52% 50%, #c98fdd 0%, transparent 58%),
+    radial-gradient(ellipse at 82% 50%, #a49bea 0%, transparent 60%);
+  opacity: .32;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+@media (max-width: 540px) {
+  .about { padding-inline: .7rem; padding-bottom: 3rem; }
+  .about__portrait { left: -6%; width: 56%; top: -10%; }
+  .about__content { margin-left: 25%; }
+  .about__intro { padding-inline: .9rem .2rem; }
+  .about h2 { font-size: 2rem; }
+  .about__intro p { font-size: .72rem; line-height: 1.6; }
+}

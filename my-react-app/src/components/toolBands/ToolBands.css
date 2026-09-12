@@ -1,0 +1,41 @@
+.tool-bands { margin: 1rem calc(-1 * clamp(1rem, 5vw, 5rem)) 0; padding: .75rem 0; display: grid; gap: .25rem; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); }
+.tool-band__track { display:flex; width:max-content; animation: tools-drift 65s linear infinite; animation-direction:var(--direction); }
+.tool-band__group { display:flex; align-items:center; flex-shrink:0; }
+.tool-logo { width:clamp(86px,8vw,112px); flex-shrink:0; display:grid; justify-items:center; gap:9px; padding:16px 0; }
+.tool-logo__art { position:relative; display:block; width:58px; height:58px; filter:drop-shadow(0 2px 1px #9e487e30) drop-shadow(0 -1px 0 #fff); }
+.tool-logo__frost { position:absolute; inset:0; mask:var(--logo) center/contain no-repeat; background:linear-gradient(135deg,#ffffffef 0%,#fff7fbea 22%,#e6dae5b0 47%,#ffffff 51%,#e7e2f1b0 74%,#fffaffed); backdrop-filter:blur(8px); box-shadow:inset 0 1px 2px #fff; }
+.tool-logo__art canvas { position:absolute; inset:0; width:100%; height:100%; opacity:0; }
+.tool-logo__glow { position:absolute; inset:-4px; mask:var(--logo) center/contain no-repeat; background:linear-gradient(120deg,#ff60b2,#d97aec,#9b79ff,#ffb9db); opacity:0; filter:blur(9px); transition:opacity .3s; }
+.tool-logo__art { isolation:isolate; }
+.tool-logo__glow { z-index:-1; }
+.tool-logo:hover .tool-logo__art { filter:drop-shadow(0 0 6px #ff80c640) drop-shadow(0 0 10px #b78aff35); }
+.tool-logo:hover .tool-logo__glow { opacity:.35; }
+.tool-logo__art { transition:filter .3s; }
+.tool-band:has(.tool-logo:hover) .tool-band__track { animation-play-state:paused; }
+@keyframes tools-drift { to { transform:translateX(-50%); } }
+@media(max-width:540px) { .tool-bands {margin-inline:-.7rem;} .tool-logo__art {width:48px;height:48px;} }
+@media(prefers-reduced-motion:reduce) { .tool-band__track {animation:none;} .tool-band {overflow-x:auto;} .tool-band__group[aria-hidden] {display:none;} }
+
+/* Move the reflection inside the logo while its silhouette stays still. */
+.tool-logo__frost {
+  background-size: 220% 220%;
+  background-position: 42% 45%;
+  animation: none;
+}
+.tool-logo:hover .tool-logo__frost { animation: logo-reflection 5s ease-in-out infinite alternate; }
+.tool-logo__art canvas { display: none; }
+.tool-logo:hover .tool-logo__art canvas { display: block; }
+@keyframes logo-reflection {
+  from { background-position: 42% 45%; }
+  to { background-position: 58% 55%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-logo__frost, .tool-logo:hover .tool-logo__frost { animation: none; }
+}
+
+.tool-logo__tint { position:absolute; inset:0; mask:var(--logo) center/contain no-repeat; background:var(--tint); opacity:0; transition:opacity .3s ease; pointer-events:none; }
+.tool-logo__art canvas { filter:saturate(.45); }
+.tool-logo:hover .tool-logo__art canvas { opacity:.3 !important; }
+
+.tool-logo:hover .tool-logo__tint { opacity:.85; }
+.tool-logo__tint { z-index:1; }

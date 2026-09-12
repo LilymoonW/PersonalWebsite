@@ -2,31 +2,50 @@
    visuals inside them are still to come. */
 
 .hero {
-  min-height: 90svh; /* the hero is taller than the generic section */
+  min-height: auto;
+  padding-inline: clamp(2rem, 8vw, 9rem);
+  padding-top: clamp(3rem, 7svh, 5rem);
+  padding-bottom: clamp(.5rem, 1vw, 1rem);
   display: flex;
   align-items: center;
-  overflow: hidden; /* keeps the gradient wash and decorations clipped */
+  /* no overflow clip: the shared wash in .hero-about spans this section
+     and #about, so clipping here would cut it at the hero's edge. */
 }
 
 .hero__inner {
-  position: relative; /* sits above the <Gradient /> wash */
-  z-index: 1;
+  position: relative; /* the wash and both children position against this */
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1000px;
+  /* Optically center the text and flower together without changing their
+     overlap. The nudge is margin rather than translateX because a
+     transform creates a stacking context, which would isolate
+     .hero__visual's multiply blend from the wash painted behind it and
+     leave the video sitting on the wash as a white rectangle. */
+  margin: 0 auto 0 calc(50% - 500px + clamp(0px, 1vw, 1rem));
+  /* single-cell stack: the title and the visual share one grid area so
+     the flower sits behind the text rather than beside it */
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 48px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: start;
+}
 
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
+/* both children occupy the same cell; z-index orders them */
+.hero__title,
+.hero__visual {
+  grid-area: 1 / 1;
+}
+.hero__title {
+  position: relative;
+  z-index: 2; /* above the shared wash */
+  justify-self: start; /* headline hugs the left edge */
 }
 
 /* Headline / subhead / CTA */
 .hero__title {
+  min-width: 0; /* grid items default to min-width:auto; the oversized
+                   h1 would otherwise widen the column and drag the
+                   subhead out of alignment with it */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,25 +53,67 @@
 }
 .hero__subhead {
   margin-top: 1.5rem;
-  font-size: 1.5rem; /* slightly larger than the base font size */
+  /* scales with the viewport like the h1, so the block keeps its
+     proportions instead of jumping at a breakpoint */
+  font-size: clamp(1rem, 1.9vw, 1.5rem);
+  line-height: 1.5;
   color: var(--text-secondary);
+
+  /* the block sizes to its first line; the second line is then nudged
+     past that right edge for the staggered look */
+  width: fit-content;
+
+  & p + p {
+    margin-top: 0.25rem; /* breathing room between the two lines */
+    margin-left: auto;   /* hug the right */
+    width: fit-content;
+    transform: translateX(clamp(0rem, 3vw, 2rem));
+  }
 }
 
 /* Centerpiece imagery */
 .hero__visual {
-  min-height: 200px; /* placeholder height — drop once there's content */
+  position: relative;
+  /* No z-index: that would create a stacking context of its own and the
+     blend below could no longer reach the wash behind it.
+
+     The source has an opaque white ground, so without blending it sits on
+     the wash as a white rectangle. Multiply drops the white and keeps the
+     dithered petals. */
+  mix-blend-mode: multiply;
+  min-width: 0;
+  justify-self: end; /* flower hugs the right edge */
+  align-self: end;
+  margin-top: clamp(2rem, 4vw, 4rem);
+  margin-right: 0;
+  width: clamp(20rem, 50vw, 700px);
+  max-width: 90%;
+  display: flex;
+  align-items: center;
 
   & img,
   & video {
     display: block;
+    /* Match the square source so the crop follows the actual video
+       edge, including on tall phone screens without letterboxing. */
+    width: 100%;
     max-width: 100%;
     height: auto;
+    object-fit: contain;
+    object-position: right center;
     image-rendering: pixelated; /* preserves the dither at scale */
   }
 }
+.hero__video {
+  /* Hide the green artifact along the source video's bottom edge. */
+  clip-path: inset(0 0 10% 0);
+}
+
 .hero h1 {
-  /* scales with the viewport: ~40px on a small phone, capped at 160px */
-  font-size: clamp(2.5rem, 11vw, 10rem);
+  /* scales with the viewport, sized so "Lilymoon" fits the grid column
+     without being clipped by .hero's overflow: hidden */
+  font-size: clamp(2.5rem, 9vw, 8rem);
+  max-width: 100%;
   font-style: italic;
   font-weight: 500;
   line-height: 1.05;
@@ -72,5 +133,46 @@
 
   &:hover {
     text-decoration-thickness: 2px;
+  }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    padding-top: clamp(2rem, 6svh, 4rem);
+    padding-bottom: .5rem;
+    min-height: auto;
+  }
+
+  .hero__inner {
+    gap: 0;
+    transform: none;
+  }
+
+  .hero__title,
+  .hero__visual {
+    grid-area: 1 / 1;
+  }
+
+  .hero__title {
+    width: 100%;
+  }
+
+  .hero__subhead {
+    max-width: 100%;
+    margin-top: .6rem;
+    font-size: clamp(.72rem, 2.2vw, 1rem);
+
+    & p + p {
+      transform: none;
+    }
+  }
+
+  .hero__visual {
+    /* Keep the flower beside the title, including its source-image whitespace. */
+    margin-top: clamp(2rem, 6vw, 3.5rem);
+    margin-right: 0;
+    width: 78%;
+    max-width: 100%;
+    justify-self: end;
   }
 }

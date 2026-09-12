@@ -1,0 +1,101 @@
+.projects {
+  min-height: auto;
+  padding: 1.5rem 0 0;
+  overflow: hidden;
+}
+.projects__heading {
+  max-width: 1100px;
+  margin: 0 auto clamp(1.5rem, 4vw, 3rem);
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.projects h2,
+#experience h2 {
+  margin: 0;
+  font-size: clamp(2.3rem, 5vw, 3.5rem);
+  font-style: italic;
+  letter-spacing: -.025em;
+}
+.projects__pause {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #f2b5d4;
+  border-radius: 50%;
+  background: transparent;
+  color: #b63870;
+  cursor: pointer;
+}
+.projects__pause svg { width: 1rem; height: 1rem; fill: currentColor; }
+.projects__pause:focus-visible { outline: 2px solid #b63870; outline-offset: 4px; }
+.project-carousel { width: 100%; overflow: hidden; padding-top: 14px; margin-top: -14px; }
+.project-carousel__track {
+  display: flex;
+  width: max-content;
+  animation: project-scroll 100s linear infinite;
+  will-change: transform;
+}
+.project-carousel__group {
+  display: flex;
+  gap: clamp(1rem, 2.6vw, 1.5rem);
+  padding-right: clamp(1rem, 2.6vw, 1.5rem);
+}
+.project-carousel__card {
+  flex: 0 0 auto;
+  width: clamp(220px, 33vw, 360px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid #f53488;
+  box-sizing: border-box;
+  background: #ecd3e2;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+@keyframes project-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (hover: hover) {
+  .project-carousel:has(.project-carousel__card:hover) .project-carousel__track { animation-play-state: paused; }
+  .project-carousel__card:hover { transform: translateY(-12px); box-shadow: 0 10px 22px #cf43871a; }
+}
+.bunny-lane { --bunny-width: clamp(200px, 28vw, 320px); overflow: hidden; margin-top: clamp(1.5rem, 4vw, 3rem); padding-bottom: .25rem; }
+.bunny-lane__track {
+  display: flex;
+  width: max-content;
+  animation: bunny-travel 25.6s steps(64, end) infinite;
+  will-change: transform;
+}
+.bunny-lane__group {
+  display: flex;
+  align-items: end;
+  width: max-content;
+}
+.bunny-runner {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--bunny-width);
+  margin-right: calc(var(--bunny-width) * -.12);
+  aspect-ratio: 224 / 128;
+  background: var(--bunny-sprite) 0 0 / 400% 100% no-repeat;
+  animation: bunny-stride 1.6s step-end infinite;
+  animation-delay: var(--phase);
+}
+@keyframes bunny-travel { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+/* Hold each original pose; never interpolate between sprite cells. */
+@keyframes bunny-stride {
+  0%, 100% { background-position: 0% 0; }
+  25% { background-position: 33.333333% 0; }
+  50% { background-position: 66.666667% 0; }
+  75% { background-position: 100% 0; }
+}
+.projects[data-paused="true"] .project-carousel__track,
+.projects[data-paused="true"] .bunny-lane__track,
+.projects[data-paused="true"] .bunny-runner { animation-play-state: paused; }
+#experience { padding-top: 1rem; padding-inline: clamp(1.5rem, 5vw, 5rem); }
+@media (prefers-reduced-motion: reduce) {
+  .project-carousel__track, .bunny-lane__track, .bunny-runner { animation: none; }
+  .project-carousel { overflow-x: auto; }
+  .project-carousel__group[aria-hidden="true"] { display: none; }
+  .projects__pause { display: none; }
+  .project-carousel__card { transition: none; }
+}

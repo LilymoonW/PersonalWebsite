@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import './Gradient.css'
 
 /**
@@ -25,6 +26,11 @@ import './Gradient.css'
  *   height     override height as % of the container.
  *   intensity  0–1 colour strength (default 0.38).
  *   blur       blur radius in px (default 120).
+ *   shape      'circle' (default) or 'splosh' — an irregular, slowly
+ *              morphing silhouette that reads as a spill rather than
+ *              a halo.
+ *   wisp       true to add trailing tendrils that stretch and curl off
+ *              the blob. Best combined with the `liquid` prop.
  *   speed      seconds for one drift cycle (default 18). Vary per blob
  *              so the motion never visibly repeats.
  *   delay      negative offset in seconds; defaults to staggering them.
@@ -49,18 +55,60 @@ function resolve(at) {
   return ANCHORS[at] ?? ANCHORS.center
 }
 
-function Gradient({ blobs = [], className = '', noise = true }) {
+/**
+ * `liquid` blends the blobs into one continuous gradient field: the whole
+ * group is blurred heavily so each blob's colour bleeds into its
+ * neighbours and no individual shape stays legible. Each instance needs
+ * its own filter id so multiple Gradients don't collide.
+ */
+let fieldId = 0
+
+function Gradient({ blobs = [], className = '', noise = true, liquid = false }) {
+  const filterId = useRef(null)
+  if (liquid && filterId.current === null) filterId.current = `wash-${fieldId++}`
+
   return (
     <div className={`gradient ${className}`.trim()} aria-hidden="true">
+      {liquid && (
+        <svg className="gradient__defs" aria-hidden="true">
+          <defs>
+            {/* Pure diffusion — deliberately no alpha-contrast pass. A
+                goo filter's contrast step is what gives blobs a defined
+                outline; here the colours should melt into one another
+                instead, so this only blurs the group as a whole. That
+                bleeds each blob's colour into its neighbours and leaves
+                a continuous field rather than countable shapes. */}
+            <filter
+              id={filterId.current}
+              x="-30%"
+              y="-30%"
+              width="160%"
+              height="160%"
+            >
+              <feGaussianBlur in="SourceGraphic" stdDeviation="58" />
+            </filter>
+          </defs>
+        </svg>
+      )}
+      <div
+        className="gradient__group"
+        style={liquid ? { filter: `url(#${filterId.current})` } : undefined}
+      >
       {blobs.map((blob, i) => {
         const { x, y } = resolve(blob.at)
         const size = blob.size ?? 80
         const height = blob.height ?? size * 1.2
 
+        // A splosh brings its own morph animation; circles cycle through
+        // the three drift paths so neighbours don't move in lockstep.
+        const variant =
+          blob.shape === 'splosh' ? 'splosh' : `${(i % 3) + 1}`
+        const wisp = blob.wisp ? ' gradient__blob--wisp' : ''
+
         return (
           <span
             key={i}
-            className={`gradient__blob gradient__blob--${(i % 3) + 1}`}
+            className={`gradient__blob gradient__blob--${variant}${wisp}`}
             style={{
               '--blob-color': blob.color,
               '--blob-x': `${x}%`,
@@ -75,6 +123,7 @@ function Gradient({ blobs = [], className = '', noise = true }) {
           />
         )
       })}
+      </div>
       {noise && <span className="gradient__noise" />}
     </div>
   )

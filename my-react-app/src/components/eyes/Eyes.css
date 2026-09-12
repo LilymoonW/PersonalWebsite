@@ -1,0 +1,27 @@
+.eyes {
+  position: relative;
+  display: block;
+  aspect-ratio: 1102 / 257;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
+}
+.eyes__original {
+  position: absolute;
+  inset: 0;
+  background-size: 100% 2700%;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyes__original { background-position: 0% 0% !important; }
+}
+
+.eyes:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* Render complete frames during blinks so the eyes, nose, and face move together. */

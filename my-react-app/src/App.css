@@ -7,3 +7,27 @@ section {
   padding: 0 24px;
   box-sizing: border-box;
 }
+
+/* Hero and #about share a stacking context so one wash can span both.
+
+   Nothing here clips: a clip on this box is what sliced the wash into a
+   hard vertical line at the wrapper's edge. The wash is faded by its own
+   mask and falloff instead, and is inset from the viewport edges so it
+   can't cause a sideways scrollbar. */
+.hero-about {
+  position: relative;
+}
+
+/* The single wash behind the hero and about sections. It sits behind all
+   content and fades to nothing at the bottom so it dissolves into the
+   projects section rather than stopping on a line. */
+.hero-about__wash {
+  z-index: -1;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    transparent 97%
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 97%);
+}

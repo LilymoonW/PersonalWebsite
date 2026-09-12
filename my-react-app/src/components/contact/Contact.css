@@ -1,0 +1,38 @@
+#contact.contact {
+  min-height: 650px;
+  padding: clamp(80px, 10vw, 140px) clamp(1.5rem, 5vw, 5rem) 100px;
+  background: radial-gradient(ellipse at 12% 115%, #f3bfd9 0%, #f9e0ed 35%, #fff0 70%), #fff;
+  color: #08060d;
+}
+.contact__inner { max-width: 1100px; margin-inline: auto; }
+.contact__content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 24px; margin-top: 0; }
+.contact__copy h2 { margin: 0 0 18px; color: #08060d; font-size: clamp(2.3rem, 5vw, 3.5rem); font-style: italic; letter-spacing: -.025em; }
+.contact__copy p { color: #795c6d; font: 400 clamp(1.15rem, 2vw, 1.4rem)/1.5 var(--heading); letter-spacing: -.02em; }
+.contact__socials { display: flex; flex-wrap: wrap; gap: clamp(16px, 2.5vw, 30px); margin-top: 32px; }
+.contact__social.tool-logo { width: auto; display: inline-flex; flex-direction: column; align-items: center; gap: 12px; min-width: 64px; padding: 4px 0; color: #70435d; font: 500 .8rem/1.4 var(--sans); transition: color 250ms ease, transform 250ms ease; }
+.contact__social:hover, .contact__social:focus-visible { color: #b63870; transform: translateY(-5px); }
+.contact__social:focus-visible { outline: 2px solid #b63870; outline-offset: 6px; border-radius: 3px; }
+.contact__phone { display: grid; width: min(115%, 540px); justify-self: end; pointer-events: none; }
+.contact__phone img { grid-area: 1 / 1; display: block; width: 100%; height: auto; transition: opacity 350ms ease; }
+.contact__phone-hover { opacity: 0; }
+.contact__content:has(.contact__social:is(:hover, :focus-visible)) .contact__phone-rest { opacity: 0; }
+.contact__content:has(.contact__social:is(:hover, :focus-visible)) .contact__phone-hover { opacity: 1; }
+@media (max-width: 760px) {
+  #contact.contact { min-height: 650px; padding-bottom: 50px; }
+  .contact__content { grid-template-columns: 1fr; gap: 24px; margin-top: 0; }
+  .contact__phone { width: min(100%, 400px); }
+  .contact__socials { margin-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact__social:hover, .contact__social:focus-visible { transform: none; }
+}
+
+.contact__social .tool-logo__art { width: 60px; height: 60px; }
+.contact__social:focus-visible .tool-logo__frost { animation: logo-reflection 5s ease-in-out infinite alternate; }
+.contact__social:focus-visible .tool-logo__tint { opacity: .85; }
+.contact__social:focus-visible .tool-logo__glow { opacity: .35; }
+.contact__social:focus-visible .tool-logo__art canvas { display: block; opacity: .3 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .contact__phone img, .contact__social, .contact__social .tool-logo__art, .contact__social .tool-logo__tint, .contact__social .tool-logo__glow { transition: none; }
+  .contact__social:focus-visible .tool-logo__frost { animation: none; }
+}

@@ -1,0 +1,19 @@
+.text-hover-effect {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--heading);
+  font-style: italic;
+  font-size: 88px;
+  font-weight: 500;
+  fill: transparent;
+  user-select: none;
+}
+
+/* Only the hit-target rect should take pointer events; the glyphs
+   themselves must not, or crossing a letter edge re-fires enter/leave. */
+.text-hover-effect text,
+.text-hover-effect g {
+  pointer-events: none;
+}
