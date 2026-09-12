@@ -1,18 +1,21 @@
+@import './fonts.css';
+
 :root {
-  --text: #6b6375;
+  --text: #000;
   --text-h: #08060d;
   --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --border: #F65D94;
+  --accent: #F65D94;
+  --surface: #EDD4E3;
+  --button: #F2B5D4;
+  --accent-bg: #F65D94;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* soft wash tints used by the Gradient component */
+  --glow-warm: #F7F0B5;
+  --glow-cool: #C8E6D0;
+
+  --sans: 'Catamaran', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Lora', Georgia, 'Times New Roman', serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -55,14 +58,9 @@ body {
 }
 
 #root {
-  width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
 }
 

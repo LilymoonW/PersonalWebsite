@@ -1,0 +1,98 @@
+.gradient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Each blob is a soft radial wash, centred on its anchor point and sized
+   past the container so it bleeds off-canvas rather than reading as a
+   circle. Position, colour and timing all come from inline custom
+   properties set by the component. */
+.gradient__blob {
+  position: absolute;
+  left: var(--blob-x);
+  top: var(--blob-y);
+  width: var(--blob-w);
+  height: var(--blob-h);
+  margin-left: calc(var(--blob-w) / -2);
+  margin-top: calc(var(--blob-h) / -2);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(
+        in srgb,
+        var(--blob-color) calc(var(--blob-intensity) * 100%),
+        transparent
+      )
+      0%,
+    transparent 70%
+  );
+  filter: blur(var(--blob-blur));
+  mix-blend-mode: multiply;
+  will-change: transform, opacity;
+  animation: drift-1 var(--blob-speed) ease-in-out infinite;
+  animation-delay: var(--blob-delay);
+}
+
+/* Cycling three drift paths keeps neighbouring blobs from moving in
+   lockstep when several share a speed. */
+.gradient__blob--2 {
+  animation-name: drift-2;
+}
+.gradient__blob--3 {
+  animation-name: drift-3;
+}
+
+/* A faint noise overlay dithers the gradient's 8-bit colour steps, which
+   otherwise show as concentric banding across a blur this wide. */
+.gradient__noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes drift-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-4%, 3%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes drift-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.08);
+    opacity: 0.78;
+  }
+  50% {
+    transform: translate3d(5%, -4%, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes drift-3 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate3d(3%, -5%, 0) scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient__blob {
+    animation: none !important;
+  }
+}
