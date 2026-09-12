@@ -96,9 +96,9 @@
 }
 
 @media (max-width: 540px) {
-  .about { padding-inline: .7rem; padding-bottom: 3rem; }
+  .about { padding-inline: .7rem .35rem; padding-bottom: 3rem; }
   .about__portrait { left: -6%; width: 56%; top: -10%; }
-  .about__content { margin-left: 25%; padding-inline: .9rem; }
-  .about h2 { font-size: 2rem; }
-  .about__intro p { font-size: .72rem; line-height: 1.6; }
+  .about__content { margin-left: 25%; padding-inline: .9rem .3rem; }
+  .about h2 { font-size: 1.75rem; }
+  .about__intro p { font-size: .68rem; line-height: 1.6; }
 }

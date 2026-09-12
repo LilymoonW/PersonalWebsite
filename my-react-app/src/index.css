@@ -53,12 +53,15 @@
   }
 }
 
+html,
 body {
   margin: 0;
   /* Trims horizontal overspill at the viewport edge. The washes extend
      past the layout by design, and clipping them on their own container
      cut them into hard lines — this stops a sideways scrollbar without
-     touching how they render. */
+     touching how they render. The clip is on html as well as body: a
+     descendant that overhangs still widens the document's scrollWidth
+     when only body clips. */
   overflow-x: clip;
 }
 

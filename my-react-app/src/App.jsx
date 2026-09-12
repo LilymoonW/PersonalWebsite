@@ -9,6 +9,7 @@ import Experiences from './components/experiences/Experiences.jsx'
 import ExperiencePage from './components/experiences/ExperiencePage.jsx'
 import Contact from './components/contact/Contact.jsx'
 import BunnyFooter from './components/footer/BunnyFooter.jsx'
+import LoadingScreen from './components/loading/LoadingScreen.jsx'
 import './App.css'
 
 function PageContent() {
@@ -124,5 +125,5 @@ function PageContent() {
 }
 
 export default function App() {
-  return <PageContent />
+  return <LoadingScreen><PageContent /></LoadingScreen>
 }

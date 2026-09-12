@@ -83,10 +83,17 @@
   .experience-timeline__label { width: 0; flex-direction: column; }
   .experience-timeline__desktop-date { display: none; }
   .experience-timeline__mobile-date { display: block; margin-bottom: 16px; }
-  .experience-timeline__year { font-size: 24px; }
-  .experience-timeline__content { padding-left: 80px; padding-right: 16px; }
-  .experience-timeline__dates { margin-top: 4px; }
+  .experience-timeline__year { font-size: 22px; }
+  /* The section already pads the viewport edge; the content column only needs
+     a hairline gutter on top of it, so text can run wider before wrapping. */
+  .experience-timeline__content { padding-left: 72px; padding-right: 2px; }
+  .experience-timeline__dates { margin-top: 4px; font-size: 12px; }
   .learn-more { width: 112px; height: 88px; }
+  #experience.experiences { padding-right: .6rem; }
+  .experience-timeline__role { font-size: 16px; }
+  .experience-timeline__company { font-size: 14px; margin-bottom: 12px; }
+  .experience-summary { font-size: 14px; line-height: 1.6; }
+  .experience-details__copy { font-size: .78rem; padding-left: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .learn-more::before { transition: none; }

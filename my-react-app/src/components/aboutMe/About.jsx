@@ -23,7 +23,7 @@ function About() {
         <div className="about__content">
           <div className="about__intro">
             <h2 id="about-heading">About Me</h2>
-            <p>Rising senior at Wellesley College studying computer science. I am passionate about creating intuitive, user-centered experiences. At the intersection of design and technical implementation.</p>
+            <p>Senior at Wellesley College studying computer science, working at the intersection of design and technical implementation. In my free time I’m into art, music, true crime podcasts, and TV shows — feel free to send me recommendations.</p>
           </div>
           <Eyes className="about__eyes" targetFrame={targetFrame} />
           <p className="about__interests" aria-label="Design, Product, Code"

@@ -13,7 +13,7 @@
 .tool-logo__art { transition:filter .3s; }
 .tool-band:has(.tool-logo:hover) .tool-band__track { animation-play-state:paused; }
 @keyframes tools-drift { to { transform:translateX(-50%); } }
-@media(max-width:540px) { .tool-bands {margin-inline:-.7rem;} .tool-logo__art {width:48px;height:48px;} }
+@media(max-width:540px) { .tool-bands {margin-inline:-.7rem -.35rem;} .tool-logo__art {width:48px;height:48px;} }
 @media(prefers-reduced-motion:reduce) { .tool-band__track {animation:none;} .tool-band {overflow-x:auto;} .tool-band__group[aria-hidden] {display:none;} }
 
 /* Move the reflection inside the logo while its silhouette stays still. */

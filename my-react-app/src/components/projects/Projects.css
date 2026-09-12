@@ -158,7 +158,16 @@
 @media (max-width: 600px) {
   .projects__cards .projects__heading { padding-left: 76px; }
   .projects__decoration { width: 350px; left: -220px; top: 28px; }
-  .project-gallery__controls { font-size: .65rem; }
+  /* Pull the right gutter in so the heading and the carousel controls stop
+     crowding the screen edge, and step the type down to match. */
+  .projects__heading { padding-right: .6rem; gap: 10px; }
+  .projects h2, #experience h2 { font-size: 1.9rem; }
+  .project-gallery__controls { padding-right: .6rem; font-size: .6rem; gap: .6rem; }
+  .project-gallery__controls button { padding: .4rem .7rem; }
+  #experience { padding-right: .6rem; }
+  .project-card__caption h3 { font-size: .98rem; }
+  .project-card__meta { font-size: .56rem; }
+  .project-carousel .project-card__description { font-size: .78rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
