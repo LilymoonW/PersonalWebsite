@@ -40,7 +40,7 @@ export default function Experiences() {
       <div className="experiences__inner">
         <h2 id="experiences-heading">Experiences</h2>
         <Timeline data={data} />
-        <a className="experiences__linkedin" href="https://www.linkedin.com/in/lilymoon-whalen-50020b252/" target="_blank" rel="noreferrer">More on LinkedIn ↗</a>
+        <a className="experiences__linkedin" href="https://www.linkedin.com/in/lilymoon-whalen-50020b252/" target="_blank" rel="noreferrer">More on LinkedIn</a>
       </div>
     </section>
   )

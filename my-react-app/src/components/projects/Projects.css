@@ -265,3 +265,24 @@
 }
 @media (hover: none), (pointer: coarse) { .project-image-gallery__expand { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .project-image-gallery__expand { transition: none; } }
+
+/* Compact homepage previews keep actions on the artwork, not below it. */
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  .project-carousel .project-card__description { display: none; }
+  .project-carousel .project-card__visual { aspect-ratio: 1; }
+  .project-carousel .project-card__media,
+  .project-carousel .project-carousel__card[data-gallery] .project-card__media { height: 100%; padding: 14px; }
+  .project-carousel .project-card__overlay {
+    position: absolute; inset: 0; justify-content: center;
+    padding: 14px; background: transparent; opacity: 1; visibility: visible;
+    overflow: hidden; pointer-events: none;
+  }
+  .project-carousel .project-card__links { width: 100%; gap: 8px; }
+  .project-carousel .project-card__links a {
+    pointer-events: auto; flex: 0 1 auto; min-width: 0; max-width: 100%;
+    min-height: 44px; padding: 10px 12px; font-size: clamp(.6rem, 1.6vw, .7rem);
+    white-space: normal; overflow-wrap: anywhere; text-align: center;
+  }
+  .project-carousel .project-carousel__card[data-video] .project-card__overlay { bottom: 54px; }
+  .project-carousel .project-image-gallery__expand { opacity: 1; }
+}
