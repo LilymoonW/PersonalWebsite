@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './components/navbar/Nav.jsx'
 import Hero from './components/hero/Hero.jsx'
 import About from './components/aboutMe/About.jsx'
@@ -10,11 +10,13 @@ import ExperiencePage from './components/experiences/ExperiencePage.jsx'
 import Contact from './components/contact/Contact.jsx'
 import BunnyFooter from './components/footer/BunnyFooter.jsx'
 import LoadingScreen from './components/loading/LoadingScreen.jsx'
+import { useRoute, routeKey } from './router/useRoute.js'
 import './App.css'
 
-function PageContent() {
+function PageContent({ route }) {
+  const { hash } = route
   useEffect(() => {
-    const id = window.location.hash.slice(1)
+    const id = hash
     if (!['about', 'projects', 'experience', 'contact'].includes(id)) return
     let cancelled = false
     const align = () => {
@@ -27,19 +29,23 @@ function PageContent() {
     if (document.readyState === 'complete') afterLoad()
     else window.addEventListener('load', afterLoad, { once: true })
     // Never pull the visitor back after they start navigating themselves.
+    // Bound a frame later: arriving here from a nav click means the click's own
+    // pointerdown/keydown is still in flight, and it would cancel this scroll
+    // before it ever ran.
     const events = ['wheel', 'touchstart', 'pointerdown', 'keydown']
-    events.forEach(event => window.addEventListener(event, cancel, { passive: true }))
+    const listen = requestAnimationFrame(() =>
+      events.forEach(event => window.addEventListener(event, cancel, { passive: true })))
     return () => {
       cancelled = true
       cancelAnimationFrame(frame)
+      cancelAnimationFrame(listen)
       window.removeEventListener('load', afterLoad)
       events.forEach(event => window.removeEventListener(event, cancel))
     }
-  }, [])
+  }, [hash])
 
-  if (new URLSearchParams(window.location.search).has('projects')) return <><ProjectsPage /><BunnyFooter /></>
-  const experienceId = new URLSearchParams(window.location.search).get('experience')
-  if (experienceId !== null) return <><ExperiencePage id={experienceId} /><BunnyFooter /></>
+  if (route.page === 'projects') return <><ProjectsPage /><BunnyFooter /></>
+  if (route.page === 'experience') return <><ExperiencePage id={route.experienceId} /><BunnyFooter /></>
 
   return (
     <>
@@ -125,5 +131,6 @@ function PageContent() {
 }
 
 export default function App() {
-  return <LoadingScreen><PageContent /></LoadingScreen>
+  const route = useRoute()
+  return <LoadingScreen><PageContent route={route} key={routeKey(route)} /></LoadingScreen>
 }
