@@ -102,3 +102,53 @@
   .about h2 { font-size: 1.75rem; }
   .about__intro p { font-size: .68rem; line-height: 1.6; }
 }
+
+/* Sits under the intro paragraph, pushed to its right edge. Italic serif
+   and the accent pink separate it from the body text without a button's
+   weight.
+
+   The outer block does the aligning: it matches .about__intro p's
+   max-width so the link lands on the paragraph's right edge rather than
+   the wider column's, and text-align: right pushes the inline text there.
+   The inner span carries the look, so the hover glow hugs the words
+   instead of stretching across the whole 43rem block. */
+.about__more {
+  display: block;
+  max-width: 43rem;
+  margin-block-start: .5rem;
+  margin-inline: 0;
+  text-align: right;
+  text-decoration: none;
+}
+.about__more span {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  color: var(--accent);
+  font-family: var(--heading);
+  font-style: italic;
+  font-size: 1.05em;
+  white-space: nowrap;
+  transition: color 200ms ease, text-shadow 200ms ease;
+}
+.about__more span::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 5% -18%;
+  background: radial-gradient(ellipse, #f2b5d4a6, #e6c7f26b 45%, transparent 72%);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.about__more:hover span, .about__more:focus-visible span {
+  color: #fff;
+  text-shadow: 0 0 8px #dc8eb9, 0 0 22px #e7a2cb;
+}
+.about__more:hover span::before,
+.about__more:focus-visible span::before,
+.about__more:active span::before { opacity: 1; transform: scale(1.15); }
+
+@media (prefers-reduced-motion: reduce) {
+  .about__more span, .about__more span::before { transition: none; }
+}
