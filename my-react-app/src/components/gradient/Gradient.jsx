@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import './Gradient.css'
 
 /**
@@ -56,44 +55,21 @@ function resolve(at) {
 }
 
 /**
- * `liquid` blends the blobs into one continuous gradient field: the whole
- * group is blurred heavily so each blob's colour bleeds into its
- * neighbours and no individual shape stays legible. Each instance needs
- * its own filter id so multiple Gradients don't collide.
+ * `liquid` blends the blobs into one continuous gradient field: each blob
+ * carries a falloff that runs all the way out and its own generous blur,
+ * so neighbouring colours bleed together with no shape staying legible.
+ *
+ * This deliberately uses only CSS `filter: blur()`. An SVG
+ * `feGaussianBlur` over the whole group diffuses slightly better, but
+ * Safari routinely rasterises SVG filters on the CPU — combined with the
+ * blend and mask here, that re-rasterised a viewport-sized surface every
+ * animation frame and stalled the first paint.
  */
-let fieldId = 0
 
 function Gradient({ blobs = [], className = '', noise = true, liquid = false }) {
-  const filterId = useRef(null)
-  if (liquid && filterId.current === null) filterId.current = `wash-${fieldId++}`
-
   return (
     <div className={`gradient ${className}`.trim()} aria-hidden="true">
-      {liquid && (
-        <svg className="gradient__defs" aria-hidden="true">
-          <defs>
-            {/* Pure diffusion — deliberately no alpha-contrast pass. A
-                goo filter's contrast step is what gives blobs a defined
-                outline; here the colours should melt into one another
-                instead, so this only blurs the group as a whole. That
-                bleeds each blob's colour into its neighbours and leaves
-                a continuous field rather than countable shapes. */}
-            <filter
-              id={filterId.current}
-              x="-30%"
-              y="-30%"
-              width="160%"
-              height="160%"
-            >
-              <feGaussianBlur in="SourceGraphic" stdDeviation="58" />
-            </filter>
-          </defs>
-        </svg>
-      )}
-      <div
-        className="gradient__group"
-        style={liquid ? { filter: `url(#${filterId.current})` } : undefined}
-      >
+      <div className={`gradient__group${liquid ? ' gradient__group--liquid' : ''}`}>
       {blobs.map((blob, i) => {
         const { x, y } = resolve(blob.at)
         const size = blob.size ?? 80

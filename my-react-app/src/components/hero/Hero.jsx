@@ -41,9 +41,12 @@ function Hero() {
 
         {/* Centerpiece — the eyes, or whichever asset leads. */}
         <div className="hero__visual">
+          {/* preload="metadata", not "auto": the poster carries first
+              paint, so the 700KB loop should not compete with the
+              fonts and first render for bandwidth. */}
           <video className="hero__video" src={lilyVideo}
             width="256" height="256" poster={lilyPoster}
-            autoPlay loop muted playsInline preload="auto" />
+            autoPlay loop muted playsInline preload="metadata" />
         </div>
       </div>
 

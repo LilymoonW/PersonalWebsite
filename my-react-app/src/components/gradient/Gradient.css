@@ -10,7 +10,7 @@
    box, so clipping slices them into hard straight lines at the edges.
    The fade is supplied by each blob's own falloff and by the mask on the
    wash itself, so nothing here needs an overflow clip. */
-.gradient:has(> .gradient__group[style*='filter']) {
+.gradient:has(> .gradient__group--liquid) {
   overflow: visible;
 }
 
@@ -152,29 +152,20 @@
   }
 }
 
-/* The diffusion filter operates on this wrapper, so every blob inside
-   blends into one field. It must not clip or the filter's spread is
-   cut off. */
+/* The blobs blend into one field inside this wrapper. It must not clip
+   or their blurs are cut off at the edges. */
 .gradient__group {
   position: absolute;
   inset: 0;
   overflow: visible;
 }
 
-/* The SVG only carries <defs>; it should never take up space. */
-.gradient__defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
 /* Inside a diffused group each blob is only a soft cloud of colour: the
    falloff starts immediately and runs all the way out, so no blob has an
-   edge of its own. The group blur then mixes neighbouring clouds into a
-   single continuous field — which is what makes this read as a gradient
-   rather than as a set of shapes. */
-.gradient__group[style*='filter'] .gradient__blob {
+   edge of its own. Their own wide blurs overlap into a single continuous
+   field — which is what makes this read as a gradient rather than as a
+   set of shapes. */
+.gradient__group--liquid .gradient__blob {
   background: radial-gradient(
     ellipse at center,
     var(--blob-color) 0%,
@@ -182,8 +173,8 @@
     color-mix(in srgb, var(--blob-color) 20%, transparent) 62%,
     transparent 85%
   );
-  /* Blobs are also blurred individually so none of them can present a
-     rim; the group filter alone leaves faint cores visible. */
+  /* Each blob is blurred generously on its own: this blur is what
+     diffuses the field now that there is no group-wide filter. */
   filter: blur(calc(var(--blob-blur) * 0.85));
   mix-blend-mode: normal;
   /* Pinned: the pulse is carried by scale, and animating opacity here
@@ -193,7 +184,7 @@
 }
 
 /* The blended field multiplies onto the page as one. */
-.gradient__group[style*='filter'] {
+.gradient__group--liquid {
   mix-blend-mode: multiply;
   opacity: 0.3;
 }
