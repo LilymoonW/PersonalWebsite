@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 export function parseRoute(url = window.location) {
   const params = new URLSearchParams(url.search)
+  if (params.has('about')) return { page: 'about', hash: '' }
   if (params.has('projects')) return { page: 'projects', hash: '' }
   const experienceId = params.get('experience')
   if (experienceId !== null) return { page: 'experience', experienceId, hash: '' }

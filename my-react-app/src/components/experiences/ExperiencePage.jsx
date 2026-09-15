@@ -24,7 +24,7 @@ function Figure({ figure }) {
 function StoryLinks({ links }) {
   if (!links?.length) return null
   return <ul className="story-links">{links.map(link => <li key={link.href}>
-    <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a>
+    <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
   </li>)}</ul>
 }
 

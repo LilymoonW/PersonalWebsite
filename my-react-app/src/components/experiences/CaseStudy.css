@@ -183,7 +183,8 @@
 .demo-carousel__toolbar p { margin: 0; color: #563D29; font: 500 14px/1.5 var(--sans); font-variant-numeric: tabular-nums; }
 .demo-carousel__toolbar p span { margin-left: 12px; font-weight: 400; }
 .demo-carousel__controls { display: flex; gap: 8px; }
-.demo-carousel__controls button { min-width: 44px; min-height: 44px; padding: 8px 12px; border: 1px solid #dcc5ae; border-radius: 24px; color: #563D29; background: #fff9f0; font: 500 14px/1 var(--sans); cursor: pointer; }
+.demo-carousel__controls button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 8px 12px; border: 1px solid #dcc5ae; border-radius: 24px; color: #563D29; background: #fff9f0; font: 500 14px/1 var(--sans); text-align: center; cursor: pointer; }
+.demo-carousel__controls button[aria-label='Previous feature'], .demo-carousel__controls button[aria-label='Next feature'] { width: 44px; padding: 0; font-size: 16px; }
 .demo-carousel__controls button:hover { background: #f7e2cb; }
 .demo-carousel button:focus-visible { outline: 2px solid #563D29; outline-offset: 3px; }
 .demo-carousel__slides { animation: demo-reveal 350ms ease both; }

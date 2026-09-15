@@ -17,20 +17,6 @@ import macaronBox from '../../assets/serendipity/packaging.jpg'
 
 export const experiences = [
   {
-    id: 'nba', title: 'DTC Web Engineering Intern', company: 'NBA', dates: 'Jun 2026 — Present',
-    previews: [
-      { src: nbaPortrait, alt: 'Lilymoon holding a basketball during her NBA internship.', fit: 'contain' },
-      { src: nbaInterns, alt: 'The NBA intern cohort together at the NBA office.' },
-    ],
-    summary: 'I work on NBA.com’s frontend, improving the interfaces for team rosters, featured videos, stats, games, and Hide Scores. Alongside resolving production issues, I modernize legacy components and write Jest tests to make the code easier to maintain. I also collaborate with QA, Android, and Product teams on AI-powered workflow automations across GitHub, Jira, and Slack, helping streamline handoffs and reduce repetitive engineering work.',
-    details: [
-      'Develop frontend enhancements and resolve production issues across Team Roster, Watch Featured, Stats, Games, and Hide Scores.',
-      'Modernize legacy components and add Jest tests to improve maintainability and reliability.',
-      'Collaborate with QA, Android, and Product on AI-powered GitHub, Jira, and Slack workflow automations.',
-    ],
-    caseStudy: nbaCaseStudy,
-  },
-  {
     id: 'julienne', title: 'Co-founder & CTO', company: 'Julienne Studios LLC', dates: 'Dec 2025 — Present',
     previews: [
       { src: catenaCafe, alt: 'The illustrated café inside the Catena app.', fit: 'contain' },
@@ -50,6 +36,20 @@ export const experiences = [
       'Ran a 71-user closed beta using interviews, surveys, and analytics, achieving 42.7% retention at three weeks.',
       'Secured $50K in funding through CU Innovation Lab while leading product strategy, prioritization, and outreach.',
     ],
+  },
+  {
+    id: 'nba', title: 'DTC Web Engineering Intern', company: 'NBA', dates: 'Jun 2026 — Aug 2026',
+    previews: [
+      { src: nbaPortrait, alt: 'Lilymoon holding a basketball during her NBA internship.', fit: 'contain' },
+      { src: nbaInterns, alt: 'The NBA intern cohort together at the NBA office.' },
+    ],
+    summary: 'I worked on NBA.com’s frontend, improving the interfaces for team rosters, featured videos, stats, games, and Hide Scores. Alongside resolving production issues, I modernized legacy components and wrote Jest tests to make the code easier to maintain. I also collaborated with QA, Android, and Product teams on AI-powered workflow automations across GitHub, Jira, and Slack, helping streamline handoffs and reduce repetitive engineering work.',
+    details: [
+      'Developed frontend enhancements and resolved production issues across Team Roster, Watch Featured, Stats, Games, and Hide Scores.',
+      'Modernized legacy components and added Jest tests to improve maintainability and reliability.',
+      'Collaborated with QA, Android, and Product on AI-powered GitHub, Jira, and Slack workflow automations.',
+    ],
+    caseStudy: nbaCaseStudy,
   },
   {
     id: 'fertility', title: 'Web Engineering Intern', company: 'Fertility Within Reach', dates: 'Feb 2025 — Dec 2026',

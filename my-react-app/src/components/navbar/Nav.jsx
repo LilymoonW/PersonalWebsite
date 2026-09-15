@@ -37,11 +37,14 @@ function Nav({ sticky = true, hrefBase = '', activeId }) {
 
   return (
     <nav className={`nav${sticky ? '' : ' nav--static'}`} aria-label="Main">
+      <a className="nav__brand" href={hrefBase || './'} aria-label="Lilymoon Whalen — home">
+        <span className="nav__mark" aria-hidden="true" />
+      </a>
       <ul>
         {LINKS.map(({ id, label }) => (
           <li key={id}>
             <a
-              href={id === 'projects' ? `${hrefBase || './'}?projects` : `${hrefBase}#${id}`}
+              href={['projects', 'about'].includes(id) ? `${hrefBase || './'}?${id}` : `${hrefBase}#${id}`}
               className={active === id ? 'active' : undefined}
               aria-current={active === id ? 'true' : undefined}
             >

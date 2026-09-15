@@ -1,0 +1,90 @@
+.about__more { display: inline-block; margin-top: 18px; text-decoration: underline; }
+.about-page { background: var(--bg); }
+.about-collage {
+  position: relative;
+  isolation: isolate;
+  --collage-glow: #f3b5d5b0;
+  padding: 38px 16px 0;
+}
+.about-collage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 55% 42% at 50% 64%, var(--collage-glow), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+.about-collage__scene { position: relative; width: min(100%, 1240px); aspect-ratio: .76; margin: auto; isolation: isolate; container-type: inline-size; }
+.collage-envelope { position: absolute; width: 54%; left: 25%; bottom: 8%; pointer-events: none; }
+.collage-envelope--back { z-index: 1; opacity: 0; }
+.collage-envelope--front { z-index: 3; opacity: 0; }
+.collage-envelope--closed { z-index: 4; }
+.collage-flight { position: absolute; left: var(--x); top: var(--y); width: var(--width); margin: 0; transform: translate(-50%, -50%) rotate(var(--angle)); opacity: 0; z-index: 4; }
+.collage-item img { width: 100%; display: block; filter: drop-shadow(0 5px 4px #46313d1c); }
+.collage-title { z-index: 5; line-height: 0; }
+.collage-title img { width: 100%; filter: drop-shadow(0 4px 3px #54324933); }
+.collage-intro {
+  box-sizing: border-box; padding: 3.2% 3.8%; border: clamp(4px, 1.2cqw, 11px) solid #fc8eba;
+  border-radius: 2.8cqw; background: #fff; color: #202020;
+  box-shadow: inset 0 1px 2px #fff9, 0 4px 9px #5c324438;
+  font: 1.75cqw/1.7 var(--sans);
+}
+.is-ready .collage-envelope--back, .is-ready .collage-envelope--front { animation: reveal-envelope .55s .2s both; }
+.is-ready .collage-envelope--closed { animation: unseal-envelope .5s .2s both; transform-origin: 50% 50%; }
+.is-ready .collage-flight { animation: fly-from-envelope 1.8s cubic-bezier(.22,.65,.22,1) var(--delay) both; }
+@keyframes reveal-envelope { from { opacity: 0; } to { opacity: 1; } }
+@keyframes unseal-envelope { 0% { opacity: 1; } 70%,100% { opacity: 0; } }
+@keyframes fly-from-envelope {
+  0% { left: 52%; top: 78%; transform: translate(-50%,-50%) scale(.35) rotate(18deg); opacity: 0; z-index: 2; }
+  12% { opacity: 1; }
+  35% { left: 51%; top: 48%; transform: translate(-50%,-50%) scale(.8) rotate(-12deg); z-index: 2; }
+  36% { z-index: 4; }
+  74% { left: var(--x); top: calc(var(--y) - 2%); transform: translate(-50%,-50%) scale(1.03) rotate(calc(var(--angle) - 3deg)); opacity: 1; }
+  100% { left: var(--x); top: var(--y); transform: translate(-50%,-50%) scale(1) rotate(var(--angle)); opacity: 1; z-index: 4; }
+}
+.has-played .collage-flight, .has-played .collage-envelope { animation: none; }
+.has-played .collage-flight, .has-played .collage-envelope--back, .has-played .collage-envelope--front { opacity: 1; }
+.has-played .collage-envelope--closed { opacity: 0; }
+@media (max-width: 600px) {
+  .about-collage { padding: 42px 8px 15px; }
+  .collage-intro { font-size: 2.25cqw; padding: 3% 3.2%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-ready .collage-flight, .is-ready .collage-envelope { animation: none; }
+  .is-ready .collage-flight, .is-ready .collage-envelope--back, .is-ready .collage-envelope--front { opacity: 1; }
+  .is-ready .collage-envelope--closed { opacity: 0; }
+}
+@media (prefers-color-scheme: dark) {
+  .about-collage { --collage-glow: #79355780; }
+}
+.collage-item { padding: 0; border: 0; background: none; touch-action: none; user-select: none; cursor: grab; -webkit-tap-highlight-color: transparent; }
+.collage-item:disabled { cursor: default; pointer-events: none; }
+.collage-item:active { cursor: grabbing; }
+.collage-item.is-raised { z-index: var(--item-layer) !important; }
+.collage-item:focus-visible { outline: 2px dashed var(--accent); outline-offset: 5px; border-radius: 10px; }
+.collage-item img { pointer-events: none; }
+/* The transparent dialog reserves room for the cutout above its white card. */
+.keepsake-detail { position: fixed; width: min(900px, calc(100vw - 32px)); max-width: none; max-height: 90svh; box-sizing: border-box; overflow: auto; padding: 22px 16px 20px; border: 0; background: transparent; color: #191719; text-align: left; }
+.keepsake-detail::backdrop { background: #24182270; backdrop-filter: blur(5px); }
+.keepsake-detail__item { position: absolute; z-index: 2; top: 24px; left: 20px; width: 250px; height: 310px; object-fit: contain; transform: rotate(-13deg); filter: drop-shadow(0 10px 8px #2c1d2520); pointer-events: auto; }
+.keepsake-detail__card { position: relative; margin: 200px 0 0 65px; padding: 120px 55px 60px 90px; background: #fff; border-radius: 28px; box-shadow: 0 18px 55px #39203020; }
+.keepsake-detail p { font: 400 clamp(19px, 2.5vw, 29px)/1.55 var(--heading); }
+@media (max-width: 600px) {
+  .keepsake-detail { padding: 16px 8px 20px; }
+  .keepsake-detail__item { width: 160px; height: 200px; top: 15px; left: 13px; }
+  .keepsake-detail__card { margin: 132px 0 0 12px; padding: 80px 24px 32px; border-radius: 24px; }
+}
+.collage-sticker--title { aspect-ratio: 830 / 450; }
+.collage-sticker--text { aspect-ratio: 1540 / 483; }
+.collage-sticker .sticker-face { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .16s ease; }
+.collage-sticker .sticker-face.is-hidden { opacity: 0; }
+.collage-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { .collage-sticker .sticker-face { transition: none; } }
+.keepsake-detail__link { display: inline-block; margin-top: 24px; color: #824461; font-size: 17px; text-decoration: underline; text-underline-offset: 5px; }
+
+
+.keepsake-detail p:focus { outline: none; }
+.keepsake-detail--controller .keepsake-detail__item { transform: rotate(-13deg) scale(1.3); transform-origin: 30% 50%; }
+.keepsake-detail--camera .keepsake-detail__item { transform: translateY(clamp(16px, 3vw, 30px)) rotate(-13deg) scale(1.3); transform-origin: 30% 50%; }

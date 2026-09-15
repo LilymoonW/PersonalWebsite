@@ -1,4 +1,9 @@
 .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-left: 36px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -51,5 +56,34 @@
   }
   @media (max-width: 1024px) {
     font-size: 13px;
+  }
+}
+
+.nav .nav__brand {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.nav__mark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: currentColor;
+  mask: url('/lilymoon.svg') center / contain no-repeat;
+}
+
+@media (max-width: 540px) {
+  .nav {
+    padding: 16px 16px 12px;
+    gap: 12px;
+  }
+
+  .nav ul {
+    column-gap: 12px;
+    row-gap: 4px;
   }
 }

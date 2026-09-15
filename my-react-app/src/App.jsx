@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Nav from './components/navbar/Nav.jsx'
 import Hero from './components/hero/Hero.jsx'
 import About from './components/aboutMe/About.jsx'
+import AboutPage from './components/aboutMe/AboutPage.jsx'
 import Gradient from './components/gradient/Gradient.jsx'
 import Projects from './components/projects/Projects.jsx'
 import ProjectsPage from './components/projects/ProjectsPage.jsx'
@@ -45,6 +46,7 @@ function PageContent({ route }) {
   }, [hash])
 
   if (route.page === 'projects') return <><ProjectsPage /><BunnyFooter /></>
+  if (route.page === 'about') return <><AboutPage /><BunnyFooter /></>
   if (route.page === 'experience') return <><ExperiencePage id={route.experienceId} /><BunnyFooter /></>
 
   return (
