@@ -80,6 +80,14 @@
 @media (max-width: 767px) {
   .experience-timeline__rail { clip-path: inset(24px 0 0); }
   .experience-timeline__entry { padding-top: 40px; gap: 0; }
+  /* Entry spacing scales down to 40px here, so the desktop 80px tail below
+     the last card reads as dead space — especially stacked with the link's
+     margin and the section's own bottom padding. The rail is sized from
+     this element, so trimming it also stops the beam dangling past the
+     last entry. */
+  .experience-timeline__body { padding-bottom: 16px; }
+  .experiences__linkedin { margin-top: 1rem; }
+  #experience.experiences { padding-bottom: 1.5rem; }
   .experience-timeline__label { width: 0; flex-direction: column; }
   .experience-timeline__desktop-date { display: none; }
   .experience-timeline__mobile-date { display: block; margin-bottom: 16px; }

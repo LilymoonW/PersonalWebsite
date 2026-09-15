@@ -19,11 +19,10 @@
 .contact__content:has(.contact__social:is(:hover, :focus-visible)) .contact__phone-hover { opacity: 1; }
 @media (max-width: 760px) {
   #contact.contact { min-height: auto; padding-top: clamp(74px, 18vw, 124px); padding-bottom: 50px; padding-right: .6rem; }
-  .contact__copy p { font-size: 1rem; }
   .contact__content { grid-template-columns: minmax(0, 1fr) clamp(150px, 46vw, 260px); gap: 0; margin-top: 0; }
   .contact__copy { display: contents; }
-  .contact__copy h2 { grid-column: 1; grid-row: 1; margin: 0; font-size: clamp(1.6rem, 5.2vw, 2.4rem); }
-  .contact__copy p { grid-column: 1; grid-row: 2; margin: 0; }
+  .contact__copy h2 { grid-column: 1; grid-row: 1; margin: 0; font-size: clamp(1.5rem, 6.4vw, 2.4rem); }
+  .contact__copy p { grid-column: 1; grid-row: 2; margin: 0; font-size: clamp(.85rem, 3.4vw, 1.15rem); }
   /* Phone keeps its size on narrow screens: it sits beside the copy but
      slightly above it, spilling left over the text column and right past
      the section padding so it never has to shrink to fit. */
