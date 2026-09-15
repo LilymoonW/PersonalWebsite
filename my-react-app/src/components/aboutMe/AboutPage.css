@@ -55,9 +55,6 @@
   .is-ready .collage-flight, .is-ready .collage-envelope--back, .is-ready .collage-envelope--front { opacity: 1; }
   .is-ready .collage-envelope--closed { opacity: 0; }
 }
-@media (prefers-color-scheme: dark) {
-  .about-collage { --collage-glow: #79355780; }
-}
 .collage-item { padding: 0; border: 0; background: none; touch-action: none; user-select: none; cursor: grab; -webkit-tap-highlight-color: transparent; }
 .collage-item:disabled { cursor: default; pointer-events: none; }
 .collage-item:active { cursor: grabbing; }
