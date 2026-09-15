@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import Nav from './components/navbar/Nav.jsx'
 import Hero from './components/hero/Hero.jsx'
 import About from './components/aboutMe/About.jsx'
-const AboutPage = lazy(() => import('./components/aboutMe/AboutPage.jsx'))
+import AboutPage from './components/aboutMe/AboutPage.jsx'
 import Gradient from './components/gradient/Gradient.jsx'
 import Projects from './components/projects/Projects.jsx'
 const ProjectsPage = lazy(() => import('./components/projects/ProjectsPage.jsx'))

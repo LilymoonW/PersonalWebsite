@@ -21,7 +21,7 @@ const keepsakes = [
   { id: 'dance-postcard', alt: 'Ballroom Dance', x: 53, y: 33, width: 33, angle: -29 },
   { id: 'brown-university-ribbons-restored', alt: 'Brown University ballroom competition ribbons', x: 84, y: 22, width: 23, angle: 4 },
   { id: 'headphones', alt: 'My headphones', x: 75, y: 36, width: 24, angle: 12 },
-  { id: 'controller', alt: 'Playstation Controller', x: 24, y: 47, width: 43, angle: -8 },
+  { id: 'controller', alt: 'Playstation Controller', x: 24, y: 47, width: 27.52, angle: -8 },
   { id: 'hirono', alt: 'Hirono collectible figure', x: 40, y: 47, width: 16, angle: -3 },
   { id: 'camera', alt: 'Camera', x: 59, y: 53, width: 31, angle: 9 },
   { id: 'coffee', alt: 'Latte', x: 76, y: 52, width: 22, angle: 0 },
@@ -87,7 +87,7 @@ function MovableItem({ item, index, enabled, onSelect }) {
   }
 
   return (
-    <button type="button" className={`collage-flight collage-item${item.kind ? ` collage-sticker collage-sticker--${item.kind}` : ''}${raised ? ' is-raised' : ''}`}
+    <button type="button" className={`collage-flight collage-item collage-item--${item.id}${item.kind ? ` collage-sticker collage-sticker--${item.kind}` : ''}${raised ? ' is-raised' : ''}`}
       style={{ '--x': `${item.x}%`, '--y': `${item.y}%`, '--width': `${item.width}%`, '--angle': `${item.angle}deg`, '--delay': `${850 + index * 85}ms`, translate: `${offset.x}cqw ${offset.y}cqw`, '--item-layer': raised || 6 }}
       disabled={!interactive} aria-label={item.kind ? `${item.alt} — ${peeled ? 'flatten' : 'peel'}` : itemLinks[item.id]?.label || `${item.alt} — view details`} aria-haspopup={item.kind || itemLinks[item.id] ? undefined : 'dialog'}
       aria-pressed={item.kind ? peeled : undefined} aria-describedby={item.kind === 'text' ? 'sticker-introduction' : undefined}

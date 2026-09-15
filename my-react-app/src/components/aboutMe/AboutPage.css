@@ -64,6 +64,9 @@
 .collage-item.is-raised { z-index: var(--item-layer) !important; }
 .collage-item:focus-visible { outline: 2px dashed var(--accent); outline-offset: 5px; border-radius: 10px; }
 .collage-item img { pointer-events: none; }
+/* Crop the source's empty margins, including the draggable hit area. */
+.collage-item--controller { aspect-ratio: 256 / 176; overflow: hidden; }
+.collage-item--controller img { position: absolute; width: 156.25%; max-width: none; left: -28.125%; top: -61.364%; }
 /* The transparent dialog reserves room for the cutout above its white card. */
 .keepsake-detail { position: fixed; width: min(900px, calc(100vw - 32px)); max-width: none; max-height: 90svh; box-sizing: border-box; overflow: auto; padding: 22px 16px 20px; border: 0; background: transparent; color: #191719; text-align: left; }
 .keepsake-detail::backdrop { background: #24182270; backdrop-filter: blur(5px); }
