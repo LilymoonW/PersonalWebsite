@@ -1,5 +1,14 @@
 @import './fonts.css';
 
+/* Touch feedback uses each component's own styling, not the browser's blue flash. */
+:where(a, button, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a, button, [role="button"], dialog):focus:not(:focus-visible) {
+  outline: none;
+}
+
 :root {
   --text: #000;
   --text-h: #08060d;
