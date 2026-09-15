@@ -3,17 +3,17 @@
 import { nbaCaseStudy } from './nbaCaseStudy.js'
 import { catenaStory } from './catenaStory.js'
 import { fertilityCaseStudy } from './fertilityCaseStudy.js'
-import wellesleyLogo from '../../assets/wellesley/logo.png'
-import reviewSlide from '../../assets/wellesley/review-slide.png'
+import wellesleyLogo from '../../assets/wellesley/logo-optimized.webp'
+import reviewSlide from '../../assets/wellesley/review-slide-optimized.webp'
 import { serendipityStory } from './serendipityStory.js'
 import nbaPortrait from '../../assets/light/nba/photo-portrait.webp'
 import nbaInterns from '../../assets/light/nba/photo-interns.webp'
-import catenaTeam from '../../assets/Julienne/showcase/team-together.jpg'
+import catenaTeam from '../../assets/Julienne/showcase/team-together-optimized.webp'
 import catenaCafe from '../../assets/Julienne/showcase/cafe.jpg'
 import fwrDemo from '../../assets/FWR/advocate-demo.mp4'
 import fwrPoster from '../../assets/FWR/advocate-poster.jpg'
-import macarons from '../../assets/serendipity/matcha-stack.jpg'
-import macaronBox from '../../assets/serendipity/packaging.jpg'
+import macarons from '../../assets/serendipity/matcha-stack-optimized.webp'
+import macaronBox from '../../assets/serendipity/packaging-optimized.webp'
 
 export const experiences = [
   {

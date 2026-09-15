@@ -1,5 +1,5 @@
 import Nav from '../navbar/Nav.jsx'
-import carousel from '../../assets/light/decorations/carousel.png'
+import carousel from '../../assets/light/decorations/carousel-optimized.webp'
 import { ProjectCard } from '../ui/AppleCardsCarousel.jsx'
 import { projects } from './projectData.js'
 import './Projects.css'

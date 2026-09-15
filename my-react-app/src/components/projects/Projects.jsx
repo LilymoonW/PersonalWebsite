@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import AppleCardsCarousel from '../ui/AppleCardsCarousel.jsx'
 import bunny from '../../assets/light/decorations/bunny-run/sprite.webp'
-import carousel from '../../assets/light/decorations/carousel.png'
+import carousel from '../../assets/light/decorations/carousel-optimized.webp'
 import './Projects.css'
 
 export default function Projects() {

@@ -1,12 +1,12 @@
 import advocateDemo from '../../assets/FWR/advocate-demo.mp4'
 import advocatePoster from '../../assets/FWR/advocate-poster.jpg'
-import logo from '../../assets/FWR/logo.png'
-import navigation from '../../assets/FWR/image.png'
-import podcasts from '../../assets/FWR/image copy.png'
-import publications from '../../assets/FWR/image copy 3.png'
-import documentation from '../../assets/FWR/image copy 4.png'
-import advocacy from '../../assets/FWR/image copy 5.png'
-import mapDesign from '../../assets/FWR/figma-2.png'
+import logo from '../../assets/FWR/logo-optimized.webp'
+import navigation from '../../assets/FWR/image-optimized.webp'
+import podcasts from '../../assets/FWR/image copy-optimized.webp'
+import publications from '../../assets/FWR/image copy 3-optimized.webp'
+import documentation from '../../assets/FWR/image copy 4-optimized.webp'
+import advocacy from '../../assets/FWR/image copy 5-optimized.webp'
+import mapDesign from '../../assets/FWR/figma-2-optimized.webp'
 
 // Portfolio narrative based on Lilymoon's account and project screenshots.
 export const fertilityCaseStudy = {

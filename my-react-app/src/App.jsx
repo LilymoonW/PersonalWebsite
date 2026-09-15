@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import Nav from './components/navbar/Nav.jsx'
 import Hero from './components/hero/Hero.jsx'
 import About from './components/aboutMe/About.jsx'
-import AboutPage from './components/aboutMe/AboutPage.jsx'
+const AboutPage = lazy(() => import('./components/aboutMe/AboutPage.jsx'))
 import Gradient from './components/gradient/Gradient.jsx'
 import Projects from './components/projects/Projects.jsx'
-import ProjectsPage from './components/projects/ProjectsPage.jsx'
+const ProjectsPage = lazy(() => import('./components/projects/ProjectsPage.jsx'))
 import Experiences from './components/experiences/Experiences.jsx'
-import ExperiencePage from './components/experiences/ExperiencePage.jsx'
+const ExperiencePage = lazy(() => import('./components/experiences/ExperiencePage.jsx'))
 import Contact from './components/contact/Contact.jsx'
 import BunnyFooter from './components/footer/BunnyFooter.jsx'
 import LoadingScreen from './components/loading/LoadingScreen.jsx'
@@ -134,5 +134,5 @@ function PageContent({ route }) {
 
 export default function App() {
   const route = useRoute()
-  return <LoadingScreen><PageContent route={route} key={routeKey(route)} /></LoadingScreen>
+  return <LoadingScreen><Suspense fallback={<p role="status" style={{ padding: 32 }}>Loading…</p>}><PageContent route={route} key={routeKey(route)} /></Suspense></LoadingScreen>
 }

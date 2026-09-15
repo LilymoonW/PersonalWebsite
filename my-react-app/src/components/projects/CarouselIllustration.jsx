@@ -1,4 +1,4 @@
-import carousel from '../../assets/light/decorations/carousel.png'
+import carousel from '../../assets/light/decorations/carousel-optimized.webp'
 import './CarouselIllustration.css'
 
 // All pieces come from the same original image, so the fixed structure never

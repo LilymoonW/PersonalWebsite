@@ -1,9 +1,9 @@
-import logo from '../../assets/serendipity/logo.png'
-import storefront from '../../assets/serendipity/storefront.png'
-import banner from '../../assets/serendipity/macaron-banner.jpg'
-import detail from '../../assets/serendipity/matcha-detail.jpg'
-import packaging from '../../assets/serendipity/packaging.jpg'
-import stack from '../../assets/serendipity/matcha-stack.jpg'
+import logo from '../../assets/serendipity/logo-optimized.webp'
+import storefront from '../../assets/serendipity/storefront-optimized.webp'
+import banner from '../../assets/serendipity/macaron-banner-optimized.webp'
+import detail from '../../assets/serendipity/matcha-detail-optimized.webp'
+import packaging from '../../assets/serendipity/packaging-optimized.webp'
+import stack from '../../assets/serendipity/matcha-stack-optimized.webp'
 
 export const serendipityStory = {
   kind: 'serendipity-story',

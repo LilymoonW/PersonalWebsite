@@ -87,3 +87,5 @@
 .keepsake-detail p:focus { outline: none; }
 .keepsake-detail--controller .keepsake-detail__item { transform: rotate(-13deg) scale(1.3); transform-origin: 30% 50%; }
 .keepsake-detail--camera .keepsake-detail__item { transform: translateY(clamp(16px, 3vw, 30px)) rotate(-13deg) scale(1.3); transform-origin: 30% 50%; }
+/* Safari may focus the dialog itself when showModal runs, even on touch. */
+.keepsake-detail, .keepsake-detail:focus, .keepsake-detail:focus-visible { outline: none; }
