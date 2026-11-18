@@ -5,9 +5,9 @@ import './AboutPage.css'
 const image = name => `/images/about/${name === 'coffee' ? 'coffee-upright' : name}.webp`
 const spotifyPlaylist = 'https://open.spotify.com/playlist/0hFtcgNXNCZ29w87yNXZ8z'
 const itemLinks = {
-  'chocolate-cherry-cake': { url: 'https://livforcake.com/black-forest-cake/', label: 'Black Forest Cake — open recipe in a new tab' },
-  headphones: { url: spotifyPlaylist, label: 'My headphones — open Spotify playlist in a new tab' },
-  'brown-university-ribbons-restored': { url: 'https://ballroom.mit.edu/index.php/category/results/', label: 'Ballroom ribbons — open competition results in a new tab' },
+  'chocolate-cherry-cake': { url: 'https://livforcake.com/black-forest-cake/', label: 'My favorite cake recipe' },
+  headphones: { url: spotifyPlaylist, label: 'Listen to my playlist' },
+  'brown-university-ribbons-restored': { url: 'https://ballroom.mit.edu/index.php/category/results/', label: 'Explore competition results' },
 }
 const introduction = 'A senior at Wellesley College studying computer science. I am passionate about creating intuitive, user-centered experiences at the intersection of design and technical implementation.'
 const stickers = [
@@ -34,8 +34,9 @@ const notes = {
   cookiedough: 'This is Cookiedough, named because she looks like cookie dough ice cream! What a cutie. She’s a Jack Russell–Chihuahua mix, but she’s bigger than both of them!',
   'budapest-postcard': 'I studied abroad in Budapest for a semester! It gave me a more global perspective on the computer science industry.',
   'dance-postcard': 'I was part of the MIT Ballroom Dance Team! I competed at schools across the East Coast, including Columbia, Tufts, MIT, and Brown.',
-  'brown-university-ribbons-restored': 'Ribbons from Brown University’s ballroom competition.',
-  headphones: 'Music and true crime podcasts are part of my everyday rotation. Recommendations are welcome!',
+  'brown-university-ribbons-restored': 'Competing is my favorite part of ballroom dancing, from dressing up to the thrill of the competition! These ribbons are from Brown University’s ballroom competition. Here’s a link to explore competition results!',
+  headphones: 'I love listening to music! My 2025 Spotify Wrapped clocked in at 76,755 minutes — that’s over 53 days of music. Here’s a link to my playlist!',
+  'chocolate-cherry-cake': 'I love baking! It’s both an art and a science: getting the measurements just right, experimenting with fun flavors, and making cute pastries. Here’s my favorite cake recipe!',
   controller: 'Last summer, I played a lot of Overcooked on PlayStation! I would love to develop something like it one day.',
   hirono: 'This one is the Voyager from the Reshape series. It represents adventure and exploration despite setbacks, and the courage to keep moving forward.',
   camera: 'I like editing in my free time, and I’m trying to get better at photography and film! Maybe one day I’ll be making cinematic vlogs.',
@@ -89,7 +90,7 @@ function MovableItem({ item, index, enabled, onSelect }) {
   return (
     <button type="button" className={`collage-flight collage-item collage-item--${item.id}${item.kind ? ` collage-sticker collage-sticker--${item.kind}` : ''}${raised ? ' is-raised' : ''}`}
       style={{ '--x': `${item.x}%`, '--y': `${item.y}%`, '--width': `${item.width}%`, '--angle': `${item.angle}deg`, '--delay': `${850 + index * 85}ms`, translate: `${offset.x}cqw ${offset.y}cqw`, '--item-layer': raised || 6 }}
-      disabled={!interactive} aria-label={item.kind ? `${item.alt} — ${peeled ? 'flatten' : 'peel'}` : itemLinks[item.id]?.label || `${item.alt} — view details`} aria-haspopup={item.kind || itemLinks[item.id] ? undefined : 'dialog'}
+      disabled={!interactive} aria-label={item.kind ? `${item.alt} — ${peeled ? 'flatten' : 'peel'}` : `${item.alt} — view details`} aria-haspopup={item.kind ? undefined : 'dialog'}
       aria-pressed={item.kind ? peeled : undefined} aria-describedby={item.kind === 'text' ? 'sticker-introduction' : undefined}
       onAnimationEnd={event => { if (event.animationName === 'fly-from-envelope') setLanded(true) }}
       onPointerDown={start} onPointerMove={move} onPointerUp={finish} onPointerCancel={finish}
@@ -123,10 +124,6 @@ export default function AboutPage() {
   }, [])
 
   function showItem(item) {
-    if (itemLinks[item.id]) {
-      window.open(itemLinks[item.id].url, '_blank', 'noopener,noreferrer')
-      return
-    }
     setSelected(item)
     dialog.current.showModal()
   }
@@ -165,6 +162,10 @@ export default function AboutPage() {
             <img className="keepsake-detail__item" src={image(selected.id)} alt={selected.alt} />
             <div className="keepsake-detail__card">
               <p id="keepsake-detail-description" tabIndex={-1} autoFocus>{selected.id === 'hirono' && 'I collect Hironos! '}{notes[selected.id]}</p>
+              {itemLinks[selected.id] && <a className="keepsake-detail__link" href={itemLinks[selected.id].url} target="_blank" rel="noopener noreferrer"
+                aria-label={`${itemLinks[selected.id].label} (opens in a new tab)`}>
+                {itemLinks[selected.id].label}
+              </a>}
             </div>
           </>}
         </dialog>

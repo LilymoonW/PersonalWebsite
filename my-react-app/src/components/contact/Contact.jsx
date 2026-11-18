@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import phoneRest from '../../assets/light/phone/2.webp'
 import phoneHover from '../../assets/light/phone/1.webp'
 import MetalLogo from '../toolBands/MetalLogo'
@@ -8,6 +9,23 @@ const email = 'lw116@wellesley.edu'
 const youtubeUrl = 'https://www.youtube.com/@lilymoon.whalen'
 
 export default function Contact() {
+  const [copyStatus, setCopyStatus] = useState('')
+  const copyTimer = useRef(null)
+
+  useEffect(() => () => clearTimeout(copyTimer.current), [])
+
+  async function copyEmail() {
+    clearTimeout(copyTimer.current)
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopyStatus('Copied!')
+      copyTimer.current = setTimeout(() => setCopyStatus(''), 2000)
+    } catch {
+      setCopyStatus(`Couldn’t copy. Email: ${email}`)
+      copyTimer.current = setTimeout(() => setCopyStatus(''), 6000)
+    }
+  }
+
   return (
     <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="contact__inner">
@@ -16,13 +34,14 @@ export default function Contact() {
             <h2 id="contact-title">Contact me</h2>
             <p>Shoot me a message or connect with me on one of these platforms.</p>
             <div className="contact__socials" aria-label="Contact and social profiles">
-              <a className="contact__social tool-logo" href={`mailto:${email}`} aria-label={`Email me at ${email}`}>
+              <button type="button" className="contact__social tool-logo" onClick={copyEmail} aria-label={`Copy email address: ${email}`}>
                 <span className="tool-logo__art" aria-hidden="true" style={{ '--logo': "url('/logos/social/email.svg')", '--tint': 'linear-gradient(135deg, #f65d94, #c98fdd 60%, #a49bea)' }}>
                   <span className="tool-logo__glow" />
                   <span className="tool-logo__frost" />
                   <span className="tool-logo__tint" />
                 </span>
-              </a>
+              </button>
+              <span className="contact__copy-status" role="status" aria-live="polite" aria-atomic="true">{copyStatus}</span>
               <a className="contact__social tool-logo" href="https://www.linkedin.com/in/lilymoon-whalen-50020b252/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
                 <span className="tool-logo__art" aria-hidden="true" style={{ '--logo': "url('/logos/social/linkedin.svg')", '--tint': '#0a66c2' }}>
                   <span className="tool-logo__glow" />
